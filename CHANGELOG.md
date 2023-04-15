@@ -1,1 +1,3 @@
-- First Release of Credit Card UI
+## 1.0.0+1
+
+- Initial public release

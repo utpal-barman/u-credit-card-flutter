@@ -1,10 +1,10 @@
-import 'package:credit_card_ui/src/constants/ui_constants.dart';
-import 'package:credit_card_ui/src/ui/credit_card_chip_nfc_view.dart';
-import 'package:credit_card_ui/src/ui/credit_card_holder_name_view.dart';
-import 'package:credit_card_ui/src/ui/credit_card_text.dart';
-import 'package:credit_card_ui/src/ui/credit_card_validity_view.dart';
-import 'package:credit_card_ui/src/utils/credit_card_helper.dart';
 import 'package:flutter/material.dart';
+import 'package:u_credit_card/src/constants/ui_constants.dart';
+import 'package:u_credit_card/src/ui/credit_card_chip_nfc_view.dart';
+import 'package:u_credit_card/src/ui/credit_card_holder_name_view.dart';
+import 'package:u_credit_card/src/ui/credit_card_text.dart';
+import 'package:u_credit_card/src/ui/credit_card_validity_view.dart';
+import 'package:u_credit_card/src/utils/credit_card_helper.dart';
 
 /// Creates Credit Card UI
 class CreditCardUi extends StatelessWidget {

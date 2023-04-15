@@ -1,5 +1,5 @@
-import 'package:credit_card_ui/src/ui/credit_card_text.dart';
 import 'package:flutter/material.dart';
+import 'package:u_credit_card/src/ui/credit_card_text.dart';
 
 ///
 class CreditCardValidityView extends StatelessWidget {

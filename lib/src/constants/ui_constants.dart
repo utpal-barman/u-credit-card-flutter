@@ -7,5 +7,5 @@ class UiConstants {
   static const fontFamily = 'ocr-a';
 
   /// Defines package name
-  static const packageName = 'credit_card_ui';
+  static const packageName = 'u_credit_card';
 }

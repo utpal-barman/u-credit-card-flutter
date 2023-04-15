@@ -1,4 +1,4 @@
-import 'package:credit_card_ui/credit_card_ui.dart';
+import 'package:u_credit_card/u_credit_card.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -33,11 +33,10 @@ class MyHomePage extends StatelessWidget {
       body: const Center(
         child: CreditCardUi(
           cardHolderFullName: 'John Doe',
-          cardNumber: '1215000000',
-          validFrom: '02/32',
-          validThru: '10/24',
-          topLeftColor: Colors.red,
-          bottomRightColor: Colors.purpleAccent,
+          cardNumber: '1234567812345678',
+          validFrom: '02/23',
+          validThru: '02/28',
+          topLeftColor: Colors.blue,
         ),
       ),
     );

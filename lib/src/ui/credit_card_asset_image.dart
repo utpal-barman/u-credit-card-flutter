@@ -1,5 +1,5 @@
-import 'package:credit_card_ui/src/constants/ui_constants.dart';
 import 'package:flutter/material.dart';
+import 'package:u_credit_card/src/constants/ui_constants.dart';
 
 ///
 class CreditCardAssetImage extends StatelessWidget {

@@ -5,11 +5,11 @@
 
 **❗ In order to start using Credit Card UI you must have the [Flutter SDK](https://docs.flutter.dev/get-started/install) installed on your machine.**
 
-Add `credit_card_ui` to your `pubspec.yaml`:
+Add `u_credit_card` to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  credit_card_ui: ^1.0.0+1
+  u_credit_card: ^1.0.0+1
 ```
 
 Install it:
@@ -20,14 +20,14 @@ flutter packages get
 
 ---
 
-`credit_card_ui` is a Flutter package that provides an easy-to-use and customizable credit card user interface. It offers a widget `CreditCardUi` that can be used to create a credit card user interface with customizable options like gradients, logos, and NFC support.
+`u_credit_card` is a Flutter package that provides an easy-to-use and customizable credit card user interface. It offers a widget `CreditCardUi` that can be used to create a credit card user interface with customizable options like gradients, logos, and NFC support.
 
 ## Installation
-To use `credit_card_ui`, add the following dependency to your `pubspec.yaml` file:
+To use `u_credit_card`, add the following dependency to your `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  credit_card_ui: ^1.0.0+1
+  u_credit_card: ^1.0.0+1
 ```
 
 Then, run flutter packages get in your terminal to install the package.
@@ -36,7 +36,7 @@ Then, run flutter packages get in your terminal to install the package.
 To use CreditCardUi, import the package:
 
 ``` dart
-import 'package:credit_card_ui/credit_card_ui.dart';
+import 'package:u_credit_card/u_credit_card.dart';
 ```
 
 Create widget of `CreditCardUi(...)` with the required parameters:

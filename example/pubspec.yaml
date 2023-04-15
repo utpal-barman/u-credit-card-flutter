@@ -30,9 +30,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  credit_card_ui:
+  u_credit_card:
     # When depending on this package from a real application you should use:
-    #  credit_card_ui: ^x.y.z
+    #  u_credit_card: ^x.y.z
     path: ../
 
 

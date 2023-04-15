@@ -1,6 +1,7 @@
-import 'package:credit_card_ui/src/constants/assets.dart';
-import 'package:credit_card_ui/src/utils/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:u_credit_card/src/constants/assets.dart';
+import 'package:u_credit_card/src/utils/utils.dart';
+
 
 /// Helper class for Credit Card
 class CreditCardHelper {

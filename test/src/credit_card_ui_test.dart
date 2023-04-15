@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:credit_card_ui/credit_card_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:u_credit_card/u_credit_card.dart';
 
 void main() {
   group('CreditCardUi', () {
