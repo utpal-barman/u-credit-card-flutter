@@ -9,7 +9,7 @@ Add `u_credit_card` to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  u_credit_card: ^1.0.0+1
+  u_credit_card: ^1.0.0+2
 ```
 
 Install it:
@@ -27,7 +27,7 @@ To use `u_credit_card`, add the following dependency to your `pubspec.yaml` file
 
 ```yaml
 dependencies:
-  u_credit_card: ^1.0.0+1
+  u_credit_card: ^1.0.0+2
 ```
 
 Then, run flutter packages get in your terminal to install the package.

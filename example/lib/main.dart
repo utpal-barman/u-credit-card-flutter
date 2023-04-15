@@ -13,8 +13,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.purple,
       ),
       home: const MyHomePage(),
     );
@@ -29,14 +30,15 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Hello")),
+      appBar: AppBar(title: const Text("u_credit_card")),
       body: const Center(
         child: CreditCardUi(
           cardHolderFullName: 'John Doe',
           cardNumber: '1234567812345678',
-          validFrom: '02/23',
-          validThru: '02/28',
+          validFrom: '01/23',
+          validThru: '01/28',
           topLeftColor: Colors.blue,
+          doesSupportNfc: true,
         ),
       ),
     );
