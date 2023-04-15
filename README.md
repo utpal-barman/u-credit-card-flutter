@@ -1,5 +1,10 @@
-# Credit Card UI
-💳 "Credit Card UI" is a Flutter package that offers a customizable solution for showing the UI of credit cards within your app.
+# Credit Card UI 💳
+🔥 "Credit Card UI" is a Flutter package that offers a customizable solution for showing the UI of credit cards within your app.
+
+<p align="center">
+<img src="https://user-images.githubusercontent.com/16848599/232253279-e7ec9f03-e85c-4760-9a07-e90323483671.png" width="450"/>
+</p>
+
 
 ## Installation 💻
 
@@ -49,6 +54,9 @@ CreditCardUi(
 )
 ```
 
+<img width="432" alt="u_credit_card_1" src="https://user-images.githubusercontent.com/16848599/232253547-37db8038-e22f-43c4-8791-6c9c8778be8b.png">
+
+
 This will create a credit card user interface with the cardholder's name, card number, and validity date. For more advanced usage, see the following parameters:
 
 ### Parameters
@@ -76,7 +84,11 @@ CreditCardUi(
   topLeftColor: Colors.blue,
   doesSupportNfc: false, // Set to true if card support NFC
 ),
+
 ```
+
+<img width="432" alt="u_credit_card_2" src="https://user-images.githubusercontent.com/16848599/232253805-72247691-6b67-4357-8fa9-03a1c21b1adf.png">
+
 This will create a credit card user interface with the cardholder's name, card number, validity dates, and blue gradient colors. The card will not have the NFC icon.
 
 
