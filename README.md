@@ -25,17 +25,6 @@ flutter packages get
 
 ---
 
-`u_credit_card` is a Flutter package that provides an easy-to-use and customizable credit card user interface. It offers a widget `CreditCardUi` that can be used to create a credit card user interface with customizable options like gradients, logos, and NFC support.
-
-## Installation
-To use `u_credit_card`, add the following dependency to your `pubspec.yaml` file:
-
-```yaml
-dependencies:
-  u_credit_card: ^1.0.0+2
-```
-
-Then, run flutter packages get in your terminal to install the package.
 
 ## Usage
 To use CreditCardUi, import the package:
