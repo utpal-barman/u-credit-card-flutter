@@ -9,7 +9,7 @@
 
 ## Installation 💻
 
-**❗ In order to start using Credit Card UI you must have the [Flutter SDK](https://docs.flutter.dev/get-started/install) installed on your machine.**
+**✅ In order to start using Credit Card UI you must have the [Flutter SDK](https://docs.flutter.dev/get-started/install) installed on your machine.**
 
 Add `u_credit_card` to your `pubspec.yaml`:
 
@@ -41,7 +41,7 @@ CreditCardUi(
   cardHolderFullName: 'John Doe',
   cardNumber: '1234567812345678',
   validThru: '10/24',
-)
+),
 ```
 
 <img width="432" alt="u_credit_card_basic_setup" src="https://user-images.githubusercontent.com/16848599/232335773-5e6fdd6e-a4d9-4c01-a202-48cbca935cbe.png">
@@ -74,14 +74,13 @@ CreditCardUi(
   validFrom: '01/23',
   validThru: '01/28',
   topLeftColor: Colors.blue,
-  doesSupportNfc: true,
 ),
 ```
 <img width="432" alt="u_credit_card_nfc_basic" src="https://user-images.githubusercontent.com/16848599/232335806-159f4873-7fcb-46e0-b559-bc5a59ab61bf.png">
 
-This will create a credit card user interface with the cardholder's name, card number, validity dates, and blue gradient colors. Additionally, The card will have the NFC icon.
+This will create a credit card user interface with the cardholder's name, card number, validity dates, and blue gradient colors. The card by default will have the NFC icon. If you don't want you can pass  `doesSupportNfc: false`
 
-If you want to place the NFC icon on the opposite side of the chip please enable it by passing `placeNfcIconAtTheEnd: true`
+If you want to place the NFC icon on the opposite side of the chip please enable it by passing `placeNfcIconAtTheEnd: true`, in that case `doesSupportNfc: true` must be passed.
 
 ``` dart
 CreditCardUi(
@@ -91,7 +90,7 @@ CreditCardUi(
     validThru: '01/28',
     topLeftColor: Colors.blue,
     doesSupportNfc: true,
-    placeNfcIconAtTheEnd: true, // <-- NFC icon will be at the end,
+    placeNfcIconAtTheEnd: true, // 👈 NFC icon will be at the end,
 ),
 ```
 
@@ -108,7 +107,7 @@ CreditCardUi(
   validThru: '10/24',
   topLeftColor: Colors.red,
   bottomRightColor: Colors.purpleAccent,
-)
+),
 ```
 This will create a credit card user interface with a red-to-purple gradient.
 
@@ -125,13 +124,13 @@ if you set greater than 1, the card size will be increased.
 
 ``` dart
 CreditCardUi(
-  scale: 0.6, // <-- this will make smaller than the normal size
+  scale: 0.6, // 👈 this will make smaller than the regular size
   cardHolderFullName: 'John Doe',
   cardNumber: '1234567812345678',
   validThru: '10/24',
   topLeftColor: Colors.red,
   bottomRightColor: Colors.purpleAccent,
-)
+),
 ```
 
 
