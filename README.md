@@ -94,8 +94,11 @@ CreditCardUi(
     doesSupportNfc: true,
     placeNfcIconAtTheEnd: true, // <-- NFC icon will be at the end,
 ),
-
 ```
+
+<img width="432" alt="u_credit_card_nfc" src="https://user-images.githubusercontent.com/16848599/232332749-92d270b6-786d-4cb4-bc80-71654ce6fd56.png">
+
+
 
 #### Custom Gradient
 
@@ -108,7 +111,12 @@ CreditCardUi(
   bottomRightColor: Colors.purpleAccent,
 )
 ```
-This will create a credit card user interface with a red-to-yellow gradient.
+This will create a credit card user interface with a red-to-purple gradient.
+
+<img width="432" alt="u_credit_card_gradient" src="https://user-images.githubusercontent.com/16848599/232333158-e0a3f488-cb36-4142-91a7-12d7d9546fca.png">
+
+
+#### Scaling
 
 If you want to scale the card, use `scale:` property.
 
