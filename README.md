@@ -2,8 +2,9 @@
 🔥 "uCreditCard" is a Flutter package that offers a customizable solution for showing the UI of credit cards within your app.
 
 <p align="center">
-<img src="https://user-images.githubusercontent.com/16848599/232289002-737ac7d3-9ba1-4c77-a1ba-b0cac85991ae.png" width="450"/>
+<img src="https://user-images.githubusercontent.com/16848599/232335515-d26e7600-c2a3-4c42-bde0-9c2e14787fb1.png" width="700"/>
 </p>
+
 
 
 ## Installation 💻
