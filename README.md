@@ -44,7 +44,7 @@ CreditCardUi(
 )
 ```
 
-<img width="432" alt="u_credit_card_1" src="https://user-images.githubusercontent.com/16848599/232253547-37db8038-e22f-43c4-8791-6c9c8778be8b.png">
+<img width="432" alt="u_credit_card_basic_setup" src="https://user-images.githubusercontent.com/16848599/232335773-5e6fdd6e-a4d9-4c01-a202-48cbca935cbe.png">
 
 
 This will create a credit card user interface with the cardholder's name, card number, and validity date. For more advanced usage, see the following parameters:
@@ -74,14 +74,12 @@ CreditCardUi(
   validFrom: '01/23',
   validThru: '01/28',
   topLeftColor: Colors.blue,
-  doesSupportNfc: false, // Set to true if card support NFC
+  doesSupportNfc: true,
 ),
-
 ```
+<img width="432" alt="u_credit_card_nfc_basic" src="https://user-images.githubusercontent.com/16848599/232335806-159f4873-7fcb-46e0-b559-bc5a59ab61bf.png">
 
-<img width="432" alt="u_credit_card_2" src="https://user-images.githubusercontent.com/16848599/232253805-72247691-6b67-4357-8fa9-03a1c21b1adf.png">
-
-This will create a credit card user interface with the cardholder's name, card number, validity dates, and blue gradient colors. The card will not have the NFC icon.
+This will create a credit card user interface with the cardholder's name, card number, validity dates, and blue gradient colors. Additionally, The card will have the NFC icon.
 
 If you want to place the NFC icon on the opposite side of the chip please enable it by passing `placeNfcIconAtTheEnd: true`
 
