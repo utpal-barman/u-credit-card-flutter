@@ -19,6 +19,7 @@ class CreditCardUi extends StatelessWidget {
     this.bottomRightColor,
     this.doesSupportNfc = true,
     this.scale = 1.0,
+    this.placeNfcIconAtTheEnd = false,
   }) : assert(
           cardNumber.length >= 4,
           'Card no. must be at least 4 of length, found  ${cardNumber.length}',
@@ -57,6 +58,14 @@ class CreditCardUi extends StatelessWidget {
   ///
   /// By default it is `true`
   final bool doesSupportNfc;
+
+  /// Places NFC icon at the opposite side of the chip,
+  ///
+  /// For this value to be impacted,
+  /// card must have NFC cababilities and you must set `doesSupportNfc: true`.
+  /// By default `placeNfcIconAtTheEnd : false`,
+  /// so, icon will be beside the chip if nfc is enabled.
+  final bool placeNfcIconAtTheEnd;
 
   /// Can scale the credit card
   ///
@@ -112,6 +121,7 @@ class CreditCardUi extends StatelessWidget {
                   top: 64,
                   child: CreditCardChipNfcView(
                     doesSupportNfc: doesSupportNfc,
+                    placeNfcIconAtTheEnd: placeNfcIconAtTheEnd,
                   ),
                 ),
                 Positioned(
@@ -150,7 +160,9 @@ class CreditCardUi extends StatelessWidget {
                 Positioned(
                   top: 108,
                   left: 20,
-                  child: CreditCardText(cardNumberMasked),
+                  child: CreditCardText(
+                    cardNumberMasked,
+                  ),
                 ),
               ],
             ),

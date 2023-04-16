@@ -39,6 +39,7 @@ class MyHomePage extends StatelessWidget {
           validThru: '01/28',
           topLeftColor: Colors.blue,
           doesSupportNfc: true,
+          placeNfcIconAtTheEnd: true,
         ),
       ),
     );
