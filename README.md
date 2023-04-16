@@ -63,6 +63,8 @@ This will create a credit card user interface with the cardholder's name, card n
 
 `doesSupportNfc` - A boolean value to indicate if the card supports NFC feature. The default value is `true`.
 
+`placeNfcIconAtTheEnd` - A boolean value to place the NFC icon at the opposite side of the chip. The deafult is `false`.
+
 #### Example
 ``` dart
 CreditCardUi(
