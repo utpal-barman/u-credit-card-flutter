@@ -1,5 +1,6 @@
 # 1.0.0+4
 - Updated Documentation
+- Chip placed in the correct place
 - Added new property `placeNfcIconAtTheEnd` to place NFC icon at the opposite side of the Chip
 
 ## 1.0.0+3
