@@ -14,7 +14,7 @@ Add `u_credit_card` to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  u_credit_card: ^1.0.0+3
+  u_credit_card: ^1.0.0+4
 ```
 
 Install it:
@@ -80,7 +80,20 @@ CreditCardUi(
 
 This will create a credit card user interface with the cardholder's name, card number, validity dates, and blue gradient colors. The card will not have the NFC icon.
 
+If you want to place the NFC icon on the opposite side of the chip please enable it by passing `placeNfcIconAtTheEnd: true`
 
+``` dart
+CreditCardUi(
+    cardHolderFullName: 'John Doe',
+    cardNumber: '1234567812345678',
+    validFrom: '01/23',
+    validThru: '01/28',
+    topLeftColor: Colors.blue,
+    doesSupportNfc: true,
+    placeNfcIconAtTheEnd: true, // <-- NFC icon will be at the end,
+),
+
+```
 
 #### Custom Gradient
 
@@ -93,12 +106,12 @@ CreditCardUi(
   bottomRightColor: Colors.purpleAccent,
 )
 ```
-This will create a credit card user interface with the red to yellow gradient.
+This will create a credit card user interface with a red-to-yellow gradient.
 
 If you want to scale the card, use `scale:` property.
 
-If you set less than 1, card size will be reduced,
-if you set greater than 1, card size will be increased.
+If you set less than 1, the card size will be reduced,
+if you set greater than 1, the card size will be increased.
 
 
 ``` dart
@@ -116,7 +129,7 @@ CreditCardUi(
 ## Contributor
 
 <a href="https://www.linkedin.com/in/utpal-barman/">
-  <img src="https://user-images.githubusercontent.com/16848599/232288339-ecbd6cb1-3210-4304-b1e1-bc8434e290a8.png" width="100px" alt="Utpal Barman"     style="border-radius:50%"/> <br /> <b>Utpal Barman</b>
+  <img src="https://user-images.githubusercontent.com/16848599/232288339-ecbd6cb1-3210-4304-b1e1-bc8434e290a8.png" width="100px" alt="Utpal Barman" style="border-radius:50%"/> <br /> <b>Utpal Barman</b>
 </a>
 
 ## License

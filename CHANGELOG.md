@@ -1,3 +1,11 @@
+# 1.0.0+4
+- Updated Documentation
+- Added new property `placeNfcIconAtTheEnd` to place NFC icon at the opposite side of the Chip
+
+## 1.0.0+3
+
+- Added image in `README.md` file
+
 ## 1.0.0+2
 
 - Updated Documentation
