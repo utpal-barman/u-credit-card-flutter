@@ -119,5 +119,7 @@ CreditCardUi(
   <img src="https://user-images.githubusercontent.com/16848599/232288339-ecbd6cb1-3210-4304-b1e1-bc8434e290a8.png" width="100px" alt="Utpal Barman"     style="border-radius:50%"/> <br /> <b>Utpal Barman</b>
 </a>
 
+## License
 
+This package is released under the [BSD 3-Clause License](https://raw.githubusercontent.com/utpal-barman/u-credit-card-flutter/main/LICENSE).
 
