@@ -1,4 +1,5 @@
-# Credit Card UI 💳
+# uCreditCard 💳
+### Credit Card UI as Flutter Widget 💎
 
 [![pub package](https://img.shields.io/pub/v/u_credit_card.svg?logo=dart&logoColor=00b9fc)](https://pub.dartlang.org/packages/u_credit_card)
 [![Last Commits](https://img.shields.io/github/last-commit/utpal-barman/u-credit-card-flutter?logo=git&logoColor=white)](https://github.com/utpal-barman/u-credit-card-flutter/commits/main)
