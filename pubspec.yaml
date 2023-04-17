@@ -1,6 +1,6 @@
 name: u_credit_card
-description: Credit Card UI
-version: 1.0.0+5
+description: uCreditCard - Easy to use beautiful Card UI Flutter Package.
+version: 1.0.1
 homepage: 'https://github.com/utpal-barman/u-credit-card-flutter'
 
 environment:
