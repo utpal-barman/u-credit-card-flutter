@@ -146,6 +146,11 @@ CreditCardUi(
 ),
 ```
 
+## Inspiration
+There are already many credit card packages out there, but none of them look realistic. So, I've decided to create something that will look the same as our cards in real life. Additionally, this project was inspired by a [Native Android library](https://github.com/vinaygaba/CreditCardView). 
+
+I'm planning on adding many features in the future, such as a background image, the ability to show/hide the card number on tap, and the logo of the card provider company, among others.
+
 
 ## Contributor
 
