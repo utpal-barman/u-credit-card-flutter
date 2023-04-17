@@ -13,9 +13,13 @@
 <img src="https://user-images.githubusercontent.com/16848599/232335515-d26e7600-c2a3-4c42-bde0-9c2e14787fb1.png" width="700"/>
 </p>
 
+### Resources 📚
+- [Documentation](https://pub.dev/documentation/u_credit_card/latest/u_credit_card/CreditCardUi-class.html)
+- [Pub Package](https://pub.dev/packages/u_credit_card)
+- [GitHub Repository](https://github.com/utpal-barman/u-credit-card-flutter)
 
 
-## Installation 💻
+## Getting Started: Installation 💻
 
 **✅ In order to start using Credit Card UI you must have the [Flutter SDK](https://docs.flutter.dev/get-started/install) installed on your machine.**
 
