@@ -2,7 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
-## [1.0.1] 👏
+## [1.0.2] 🖼️
+
+### Added
+
+- 📝 Added Background image on card feature
+- 📝 Added Card company logo adding feature
+- 📝 Type of card can be now specified
+
+## [1.0.1] 📗
 
 ### Added
 
