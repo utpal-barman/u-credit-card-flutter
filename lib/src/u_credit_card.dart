@@ -7,33 +7,34 @@ import 'package:u_credit_card/src/ui/credit_card_top_section_view.dart';
 import 'package:u_credit_card/src/ui/credit_card_validity_view.dart';
 import 'package:u_credit_card/src/utils/credit_card_helper.dart';
 
-///
+/// Types of Cards
 enum CardType {
-  ///
+  /// Credit Card
   credit,
 
-  ///
+  /// Debit Card
   debit,
 
-  ///
+  /// Prepaid Card
   prepaid,
 
-  ///
+  /// Gift Card
   giftCard,
 
-  ///
+  /// Others
   other,
 }
 
-///
+/// Position of the Card Provider logo
+/// Left or Right in the top part of the card
 enum CardProviderLogoPosition {
-  ///
+  /// Set the logo to the left side
   left,
 
-  ///
+  /// Set the logo to the left side
   right;
 
-  ///
+  /// Find if the logo is set to left or not
   bool get isLeft => this == CardProviderLogoPosition.left;
 }
 
