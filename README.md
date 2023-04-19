@@ -28,7 +28,7 @@ Add `u_credit_card` to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  u_credit_card: ^1.0.1
+  u_credit_card: ^1.0.2
 ```
 
 Install it:
@@ -63,21 +63,20 @@ CreditCardUi(
 This will create a credit card user interface with the cardholder's name, card number, and validity date. For more advanced usage, see the following parameters:
 
 ### Parameters
-`cardHolderFullName` - A string value for the cardholder's full name. This is a required parameter.
-
-`cardNumber` - A string value for the full credit card number. This is a required parameter.
-
-`validThru` - A string value for the validity date of the card. It must be in the format "mm/yy". This is a required parameter.
-
-`validFrom` - An optional string value for the valid from the date of the card. It must be in the format "mm/yy".
-
-`topLeftColor` - A Color value for the top-left gradient color of the card. The default value is Colors. purple.
-
-`bottomRightColor` - A Color value for the bottom-right gradient color of the card. If not specified, a darker version of the `topLeftColor` will be used.
-
-`doesSupportNfc` - A boolean value to indicate if the card supports NFC feature. The default value is `true`.
-
-`placeNfcIconAtTheEnd` - A boolean value to place the NFC icon at the opposite side of the chip. The deafult is `false`.
+| Name                        | Type                       | Description                                                                                                                                                                                                             |
+|-----------------------------|----------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `cardHolderFullName`        | `String`                   | The cardholder's full name. This is a required parameter.                                                                                                                                                               |
+| `cardNumber`                | `String`                   | The full credit card number. This is a required parameter.                                                                                                                                                              |
+| `validThru`                 | `String`                   | The validity date of the card. It must be in the format "mm/yy". This is a required parameter.                                                                                                                          |
+| `validFrom`                 | `String`                   | The valid from the date of the card. It must be in the format "mm/yy". This parameter is optional.                                                                                                                      |
+| `topLeftColor`              | `Color`                    | The top-left gradient color of the card. The default value is `Colors.purple`.                                                                                                                                          |
+| `bottomRightColor`          | `Color`                    | The bottom-right gradient color of the card. If not specified, a darker version of the `topLeftColor` will be used.                                                                                                     |
+| `doesSupportNfc`            | `bool`                     | A boolean value to indicate if the card supports NFC feature. The default value is `true`.                                                                                                                              |
+| `placeNfcIconAtTheEnd`      | `bool`                     | A boolean value to place the NFC icon at the opposite side of the chip. The default value is `false`.                                                                                                                   |
+| `cardType`                  | `CardType`                 | Specify the type of the card to display. By default, the value is set to `CardType.credit`. You can set it to `CardType.other` if you prefer not to specify a card type. This is optional.                              |
+| `cardProviderLogo`          | `Widget`                   | Provide a widget for the logo of the card provider. If this parameter is not set, the card will be displayed without a logo. This is optional.                                                                          |
+| `cardProviderLogoPosition`  | `CardProviderLogoPosition` | Set the position of the card provider logo on the card. The default value is `CardProviderLogoPosition.right`. You can set it to `CardProviderLogoPosition.left` or `CardProviderLogoPosition.right`. This is optional. |
+| `backgroundDecorationImage` | `DecorationImage`          | Set a background image for the card. This parameter supports both asset and network images. If this parameter is not set, the card will be displayed without a background image. This is optional.                      |
 
 #### Example
 ``` dart
@@ -146,10 +145,38 @@ CreditCardUi(
 ),
 ```
 
-## Inspiration
-There are already many credit card packages out there, but none of them look realistic. So, I've decided to create something that will look the same as our cards in real life. Additionally, this project was inspired by a [Native Android library](https://github.com/vinaygaba/CreditCardView). 
+#### Additional Customizations
+To further customize the card, you can add a background image by using the `backgroundDecorationImage` property. Additionally, you can include a logo for the card provider using the `cardProviderLogo` property. This logo can be positioned on either the left or the right side of the card using the `cardProviderLogoPosition` property.
 
-I'm planning on adding many features in the future, such as a background image, the ability to show/hide the card number on tap, and the logo of the card provider company, among others.
+If you want to specify a particular card type to display, you can set it using the `cardType` property. If you prefer not to specify a card type, you can set `cardType: CardType.other`.
+
+Here is an example of how to use these customization options:
+
+Example:
+``` dart
+CreditCardUi(
+    cardHolderFullName: 'John Doe',
+    cardNumber: '1234567812345678',
+    validFrom: '01/23',
+    validThru: '01/28',
+    topLeftColor: Colors.blue,
+    doesSupportNfc: true,
+    placeNfcIconAtTheEnd: true,
+    cardType: CardType.debit,
+    cardProviderLogo: FlutterLogo(), // 👈 Set your logo here, supports any widget
+    cardProviderLogoPosition: CardProviderLogoPosition.right,
+    backgroundDecorationImage: DecorationImage(
+    fit: BoxFit.cover,
+    image: NetworkImage( // 👈 `AssetImage` is also supported
+        'https://....',
+      ),
+    ),
+),
+```
+
+
+## Inspiration
+There are already many credit card packages out there, but none of them look realistic. So, I've decided to create something that will look the same as our cards in real life. Additionally, this project was inspired by a [Native Android library](https://github.com/vinaygaba/CreditCardView).
 
 
 ## Contributor
