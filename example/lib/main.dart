@@ -40,6 +40,9 @@ class MyHomePage extends StatelessWidget {
           topLeftColor: Colors.blue,
           doesSupportNfc: true,
           placeNfcIconAtTheEnd: true,
+          cardType: CardType.debit,
+          cardProviderLogo: FlutterLogo(),
+          cardProviderLogoPosition: CardProviderLogoPosition.right,
         ),
       ),
     );

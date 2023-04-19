@@ -3,8 +3,39 @@ import 'package:u_credit_card/src/constants/ui_constants.dart';
 import 'package:u_credit_card/src/ui/credit_card_chip_nfc_view.dart';
 import 'package:u_credit_card/src/ui/credit_card_holder_name_view.dart';
 import 'package:u_credit_card/src/ui/credit_card_text.dart';
+import 'package:u_credit_card/src/ui/credit_card_top_section_view.dart';
 import 'package:u_credit_card/src/ui/credit_card_validity_view.dart';
 import 'package:u_credit_card/src/utils/credit_card_helper.dart';
+
+///
+enum CardType {
+  ///
+  credit,
+
+  ///
+  debit,
+
+  ///
+  prepaid,
+
+  ///
+  giftCard,
+
+  ///
+  other,
+}
+
+///
+enum CardProviderLogoPosition {
+  ///
+  left,
+
+  ///
+  right;
+
+  ///
+  bool get isLeft => this == CardProviderLogoPosition.left;
+}
 
 /// Creates Credit Card UI
 class CreditCardUi extends StatelessWidget {
@@ -20,6 +51,10 @@ class CreditCardUi extends StatelessWidget {
     this.doesSupportNfc = true,
     this.scale = 1.0,
     this.placeNfcIconAtTheEnd = false,
+    this.cardType = CardType.credit,
+    this.cardProviderLogo,
+    this.cardProviderLogoPosition = CardProviderLogoPosition.right,
+    this.backgroundDecorationImage,
   }) : assert(
           cardNumber.length >= 4,
           'Card no. must be at least 4 of length, found  ${cardNumber.length}',
@@ -75,6 +110,24 @@ class CreditCardUi extends StatelessWidget {
   /// By default the value is 1.0
   final double scale;
 
+  /// Provide the type of the card.
+  /// By default, it's `CardType.credit`
+  ///
+  /// Set `CardType.other` if you don't want to set anything
+  final CardType cardType;
+
+  /// Provide the logo of the card provider (Optional).
+  final Widget? cardProviderLogo;
+
+  /// Set the position of the card provider,
+  /// by default, it is on the right
+  ///
+  /// Set `CardProviderLogoPosition.left` or `CardProviderLogoPosition.right`
+  final CardProviderLogoPosition cardProviderLogoPosition;
+
+  /// Set Background image, can support both asset and network image
+  final DecorationImage? backgroundDecorationImage;
+
   @override
   Widget build(BuildContext context) {
     final cardNumberMasked = CreditCardHelper.maskCreditCardNumber(
@@ -113,9 +166,23 @@ class CreditCardUi extends StatelessWidget {
                   conditionalBottomRightColor,
                 ],
               ),
+              image: backgroundDecorationImage,
             ),
             child: Stack(
               children: [
+                Positioned(
+                  left: 16,
+                  top: 16,
+                  child: SizedBox(
+                    height: 32,
+                    width: 268,
+                    child: CreditCardTopLogo(
+                      cardType: cardType,
+                      cardProviderLogo: cardProviderLogo,
+                      cardProviderLogoPosition: cardProviderLogoPosition,
+                    ),
+                  ),
+                ),
                 Positioned(
                   left: 20,
                   top: 64,
