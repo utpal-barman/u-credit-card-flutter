@@ -23,7 +23,7 @@
 
 ## Getting Started: Installation 💻
 
-**✅ In order to start using Credit Card UI you must have the [Flutter SDK](https://docs.flutter.dev/get-started/install) installed on your machine.**
+**👉 In order to start using Credit Card UI you must have the [Flutter SDK](https://docs.flutter.dev/get-started/install) installed on your machine.**
 
 Add `u_credit_card` to your `pubspec.yaml`:
 
@@ -91,9 +91,13 @@ CreditCardUi(
 ```
 <img width="432" alt="u_credit_card_nfc_basic" src="https://user-images.githubusercontent.com/16848599/232335806-159f4873-7fcb-46e0-b559-bc5a59ab61bf.png">
 
-This will create a credit card user interface with the cardholder's name, card number, validity dates, and blue gradient colors. The card by default will have the NFC icon. If you don't want you can pass  `doesSupportNfc: false`
+Get ready to create a sleek and stylish credit card interface with just a few lines of code! With this package, you can easily customize the cardholder's name, card number, validity dates, and gradient colors to make it uniquely yours.
 
-If you want to place the NFC icon on the opposite side of the chip please enable it by passing `placeNfcIconAtTheEnd: true`, in that case `doesSupportNfc: true` must be passed.
+By default, the card will have a chic blue gradient and an NFC icon. But don't worry, if you don't want the NFC icon, simply pass `doesSupportNfc: false`.
+
+Want to switch things up and place the NFC icon on the opposite side of the chip? No problem! Just enable it by passing `placeNfcIconAtTheEnd: true`, but remember to also pass `doesSupportNfc: true`.
+
+Let's make your app look as sleek as that shiny new credit card!
 
 ``` dart
 CreditCardUi(
@@ -176,6 +180,9 @@ CreditCardUi(
 ```
 
 <img width="432" alt="Screenshot_2023-04-20_at_2 02 42_AM-removebg-preview" src="https://user-images.githubusercontent.com/16848599/233195568-5a197e2b-115c-46b1-876c-3428726f38cb.png">
+
+
+ধন্যবাদ
 
 ---
 
