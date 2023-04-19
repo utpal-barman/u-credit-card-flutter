@@ -186,7 +186,7 @@ There are already many credit card packages out there, but none of them look rea
 ## Contributor
 
 <a href="https://www.linkedin.com/in/utpal-barman/">
-  <img src="https://user-images.githubusercontent.com/16848599/232288339-ecbd6cb1-3210-4304-b1e1-bc8434e290a8.png" width="100px" alt="Utpal Barman" style="border-radius:50%"/> <br /> <b>Utpal Barman</b>
+  <img src="https://user-images.githubusercontent.com/16848599/232288339-ecbd6cb1-3210-4304-b1e1-bc8434e290a8.png" width="100px" alt="Utpal Barman" style="border-radius:50%"/> <br /> <b>Utpal Barman 🇧🇩</b>
 </a>
 <br/> <br/>
 <p>
