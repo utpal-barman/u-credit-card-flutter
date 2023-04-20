@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.3] 🛠️
+
+### Fixed
+
+- 📝 Card number length is now flexible
+- 🚀 Optimized grouping algorithm for improved performance and accuracy
+
+
 ## [1.0.2] 🖼️
 
 ### Added
