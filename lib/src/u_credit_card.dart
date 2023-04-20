@@ -56,10 +56,7 @@ class CreditCardUi extends StatelessWidget {
     this.cardProviderLogo,
     this.cardProviderLogoPosition = CardProviderLogoPosition.right,
     this.backgroundDecorationImage,
-  }) : assert(
-          cardNumber.length >= 4,
-          'Card no. must be at least 4 of length, found  ${cardNumber.length}',
-        );
+  });
 
   /// Full Name of the Card Holder
   final String cardHolderFullName;
