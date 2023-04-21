@@ -1,20 +1,25 @@
----
-name: Feature request
-about: Suggest an idea for this project
-title: ''
-labels: ''
-assignees: ''
+## Feature Request
 
----
+### Describe the Feature
 
-**Is your feature request related to a problem? Please describe.**
-A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
+Please provide a clear and concise description of the feature you are requesting. What problem does it solve? How will it improve the user experience of the package?
 
-**Describe the solution you'd like**
-A clear and concise description of what you want to happen.
+### Proposed Solution
 
-**Describe alternatives you've considered**
-A clear and concise description of any alternative solutions or features you've considered.
+Please describe the solution you are proposing in as much detail as possible. What should the new feature do? How should it work? What should be the expected behavior?
 
-**Additional context**
-Add any other context or screenshots about the feature request here.
+### Possible Alternatives
+
+Are there any alternative solutions to the problem that you have considered? If so, please describe them here.
+
+### Additional Context
+
+Is there any additional context that you would like to provide? For example, is there any relevant background information that would help us understand the need for this feature? Are there any specific use cases that the feature should support?
+
+### Checklist
+
+Please mark the following items as complete before submitting your feature request:
+
+- [ ] I have searched the existing issues to make sure this feature has not already been requested.
+- [ ] I have reviewed the documentation and confirmed that the feature is not already available.
+- [ ] I understand that this is a request and not a guarantee that the feature will be implemented.
