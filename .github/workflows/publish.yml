@@ -10,5 +10,5 @@ on:
 
 # Publish using custom workflow
 jobs:
-  publish:
+  dar_pub_publish:
     uses: dart-lang/setup-dart/.github/workflows/publish.yml@v1
