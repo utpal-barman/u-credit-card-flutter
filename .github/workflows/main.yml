@@ -1,1 +1,25 @@
+name: Actions on Pull request and push to develop
+
+on:
+  push:
+    branches:
+      - develop
+      
+  pull_request:
+
+# Publish using custom workflow
+jobs:
+  dart_pub_publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+      - uses: dart-lang/setup-dart@v1
+      - name: Install dependencies
+        run: dart pub get
+      - name: Run Dart Analyze
+        run: dart analyze
 
