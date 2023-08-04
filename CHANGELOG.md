@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.4] 🛠️
+
+### Fixed
+
+- 📝 Card numbers with space bug is fixed
+
 ## [1.0.3] 🛠️
 
 ### Fixed
