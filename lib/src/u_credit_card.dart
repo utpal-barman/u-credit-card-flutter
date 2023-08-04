@@ -129,7 +129,7 @@ class CreditCardUi extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cardNumberMasked = CreditCardHelper.maskCreditCardNumber(
-      cardNumber,
+      cardNumber.replaceAll(' ', ''),
     );
 
     final validFromMasked = validFrom == null
