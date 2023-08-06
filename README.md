@@ -42,7 +42,7 @@ flutter packages get
 
 
 ## Usage
-To use CreditCardUi, import the package:
+To use `CreditCardUi()` widget, import the package:
 
 ``` dart
 import 'package:u_credit_card/u_credit_card.dart';
