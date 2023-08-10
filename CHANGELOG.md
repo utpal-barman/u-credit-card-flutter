@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.6] 🛠️
+
+### Feature
+
+- 📝 Added `disableShowingCardLogo:` property to hide the card logo
 
 ## [1.0.5] 🛠️
 

@@ -56,6 +56,7 @@ class CreditCardUi extends StatelessWidget {
     this.cardProviderLogo,
     this.cardProviderLogoPosition = CardProviderLogoPosition.right,
     this.backgroundDecorationImage,
+    this.disableShowingCardLogo = false,
   });
 
   /// Full Name of the Card Holder
@@ -126,6 +127,9 @@ class CreditCardUi extends StatelessWidget {
   /// Set Background image, can support both asset and network image
   final DecorationImage? backgroundDecorationImage;
 
+  /// Disable card type logo, just set to `true`
+  final bool disableShowingCardLogo;
+
   @override
   Widget build(BuildContext context) {
     final cardNumberMasked = CreditCardHelper.maskCreditCardNumber(
@@ -146,6 +150,17 @@ class CreditCardUi extends StatelessWidget {
         CreditCardHelper.getDarkerColor(
           topLeftColor,
         );
+
+    Widget cardLogoWidget;
+    final cardLogoString = CreditCardHelper.getCardLogo(cardNumberMasked);
+    if (disableShowingCardLogo || cardLogoString.isEmpty) {
+      cardLogoWidget = const SizedBox.shrink();
+    } else {
+      cardLogoWidget = Image.asset(
+        CreditCardHelper.getCardLogo(cardNumberMasked),
+        package: UiConstants.packageName,
+      );
+    }
 
     return Transform.scale(
       scale: scale,
@@ -207,10 +222,7 @@ class CreditCardUi extends StatelessWidget {
                       duration: UiConstants.animationDuration,
                       child: Container(
                         key: ValueKey(cardNumberMasked),
-                        child: Image.asset(
-                          CreditCardHelper.getCardLogo(cardNumberMasked),
-                          package: UiConstants.packageName,
-                        ),
+                        child: cardLogoWidget,
                       ),
                     ),
                   ),

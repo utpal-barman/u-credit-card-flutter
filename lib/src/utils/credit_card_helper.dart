@@ -88,7 +88,7 @@ class CreditCardHelper {
       case CreditCardType.discover:
         return Assets.discoverLogo;
       case CreditCardType.other:
-        return Assets.visaLogo;
+        return '';
     }
   }
 }
