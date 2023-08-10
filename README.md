@@ -29,7 +29,7 @@ Add `u_credit_card` to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  u_credit_card: ^1.0.5
+  u_credit_card: ^1.0.6
 ```
 
 Install it:
