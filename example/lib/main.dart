@@ -34,7 +34,7 @@ class MyHomePage extends StatelessWidget {
       body: const Center(
         child: CreditCardUi(
           cardHolderFullName: 'John Doe',
-          cardNumber: '1234567812345678',
+          cardNumber: '4123456781234567',
           validFrom: '01/23',
           validThru: '01/28',
           topLeftColor: Colors.blue,
