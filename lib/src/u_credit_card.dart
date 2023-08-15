@@ -7,7 +7,7 @@ import 'package:u_credit_card/src/ui/credit_card_top_section_view.dart';
 import 'package:u_credit_card/src/ui/credit_card_validity_view.dart';
 import 'package:u_credit_card/src/utils/credit_card_helper.dart';
 
-/// Types of Cards
+/// Types of Cards.
 enum CardType {
   /// Credit Card
   credit,
@@ -25,7 +25,7 @@ enum CardType {
   other,
 }
 
-/// Types of payment network
+/// Types of payment network.
 enum CreditCardType {
   /// VISA
   visa,
@@ -43,22 +43,22 @@ enum CreditCardType {
   none,
 }
 
-/// Position of the Card Provider logo
-/// Left or Right in the top part of the card
+/// Position of the Card Provider logo.
+/// Left or Right in the top part of the card.
 enum CardProviderLogoPosition {
-  /// Set the logo to the left side
+  /// Set the logo to the left side.
   left,
 
-  /// Set the logo to the left side
+  /// Set the logo to the left side.
   right;
 
-  /// Find if the logo is set to left or not
+  /// Find if the logo is set to left or not.
   bool get isLeft => this == CardProviderLogoPosition.left;
 }
 
-/// Creates Credit Card UI
+/// Creates Credit Card UI.
 class CreditCardUi extends StatelessWidget {
-  /// Creates Credit Card UI
+  /// Creates Credit Card UI.
   const CreditCardUi({
     super.key,
     required this.cardHolderFullName,
@@ -79,38 +79,38 @@ class CreditCardUi extends StatelessWidget {
     this.disableShowingCardLogo = false,
   });
 
-  /// Full Name of the Card Holder
+  /// Full Name of the Card Holder.
   final String cardHolderFullName;
 
-  /// Full credit card number, can support asterisks
+  /// Full credit card number, can support asterisks.
   final String cardNumber;
 
   /// Enter valid from date of the card month and year like mm/yy,
   ///
-  /// Example 01/23, here 01 means month January & 23 means year 2023
-  /// Optional field, can be skipped
+  /// Example 01/23, here 01 means month January & 23 means year 2023.
+  /// Optional field, can be skipped.
   final String? validFrom;
 
-  /// Enter validity of the card month and year like mm/yy,
+  /// Enter validity of the card month and year like mm/yy.
   ///
-  /// Example 01/28, here 01 means month January & 28 means year 2028
+  /// Example 01/28, here 01 means month January & 28 means year 2028.
   final String validThru;
 
   /// Top Left Color for the Gradient,
-  /// by default it's `Colors.purple`
+  /// by default it's `Colors.purple`.
   ///
-  /// Tip: Avoid light colors, because texts are now white
+  /// Tip: Avoid light colors, because texts are now white.
   final Color topLeftColor;
 
   /// Bottom Left Color for the Gradient,
-  /// by default it's deeper version of `topLeftColor`
+  /// by default it's deeper version of `topLeftColor`.
   ///
-  /// Tip: Avoid light colors, because texts are now white
+  /// Tip: Avoid light colors, because texts are now white.
   final Color? bottomRightColor;
 
   /// Shows a NFC icon to tell user if the card supports NFC feature.
   ///
-  /// By default it is `true`
+  /// By default it is `true`.
   final bool doesSupportNfc;
 
   /// Places NFC icon at the opposite side of the chip,
@@ -121,40 +121,40 @@ class CreditCardUi extends StatelessWidget {
   /// so, icon will be beside the chip if nfc is enabled.
   final bool placeNfcIconAtTheEnd;
 
-  /// Can scale the credit card
+  /// Can scale the credit card.
   ///
   /// if you want reduce the size,
-  /// set the value less than 1, else set greater than 1
+  /// set the value less than 1, else set greater than 1.
   ///
-  /// By default the value is 1.0
+  /// By default the value is 1.0.
   final double scale;
 
-  /// Provide the type of the card - credit or debit
+  /// Provide the type of the card - credit or debit.
   /// By default, it's `CardType.credit`
   ///
-  /// Set `CardType.other` if you don't want to set anything
+  /// Set `CardType.other` if you don't want to set anything.
   final CardType cardType;
 
   /// Set Credit card type to set network provider logo - VISA, Mastercard, etc.
   ///
   /// Set `creditCardType: CreditCardType.none` to disable showing the logo.
   /// If this value is skipped, the card will show the logo automatically
-  /// based on the `cardNumber`
+  /// based on the `cardNumber`.
   final CreditCardType? creditCardType;
 
   /// Provide the logo of the card provider (Optional).
   final Widget? cardProviderLogo;
 
   /// Set the position of the card provider,
-  /// by default, it is on the right
+  /// by default, it is on the right.
   ///
-  /// Set `CardProviderLogoPosition.left` or `CardProviderLogoPosition.right`
+  /// Set `CardProviderLogoPosition.left` or `CardProviderLogoPosition.right`.
   final CardProviderLogoPosition cardProviderLogoPosition;
 
-  /// Set Background image, can support both asset and network image
+  /// Set Background image, can support both asset and network image.
   final DecorationImage? backgroundDecorationImage;
 
-  /// Disable credit card type logo, just set to `true`
+  /// Disable credit card type logo, just set to `true`.
   @Deprecated('Use `creditCardType: CreditCardType.none` instead')
   final bool disableShowingCardLogo;
 
