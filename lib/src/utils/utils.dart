@@ -1,20 +1,4 @@
-///
-enum CreditCardType {
-  ///
-  visa,
-
-  ///
-  mastercard,
-
-  ///
-  amex,
-
-  ///
-  discover,
-
-  ///
-  other,
-}
+import 'package:u_credit_card/u_credit_card.dart';
 
 ///
 class CreditCard {
@@ -60,7 +44,7 @@ class CreditCard {
     final cardNumber = number.trim().replaceAll(RegExp('[^0-9]'), '');
 
     if (cardNumber.isEmpty) {
-      return CreditCardType.other;
+      return CreditCardType.none;
     }
 
     if (cardNumber.startsWith('4')) {
@@ -81,6 +65,6 @@ class CreditCard {
       return CreditCardType.discover;
     }
 
-    return CreditCardType.other;
+    return CreditCardType.none;
   }
 }

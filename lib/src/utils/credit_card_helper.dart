@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:u_credit_card/src/constants/assets.dart';
 import 'package:u_credit_card/src/utils/utils.dart';
+import 'package:u_credit_card/u_credit_card.dart';
 
 /// Helper class for Credit Card
 class CreditCardHelper {
@@ -72,8 +73,8 @@ class CreditCardHelper {
     );
   }
 
-  /// Get Card Logo String based on Card Number
-  static String getCardLogo(String cardNumber) {
+  /// Get Card Logo String based on `cardNumber`
+  static String getCardLogoFromCardNumber({required String cardNumber}) {
     final creditCard = CreditCard(cardNumber);
 
     final cardType = creditCard.cardType;
@@ -87,7 +88,25 @@ class CreditCardHelper {
         return Assets.amexLogo;
       case CreditCardType.discover:
         return Assets.discoverLogo;
-      case CreditCardType.other:
+      case CreditCardType.none:
+        return '';
+    }
+  }
+
+  /// Get Card Logo String based on [CreditCardType]
+  static String getCardLogoFromType({required CreditCardType creditCardType}) {
+    final cardType = creditCardType;
+
+    switch (cardType) {
+      case CreditCardType.visa:
+        return Assets.visaLogo;
+      case CreditCardType.mastercard:
+        return Assets.masterCardLogo;
+      case CreditCardType.amex:
+        return Assets.amexLogo;
+      case CreditCardType.discover:
+        return Assets.discoverLogo;
+      case CreditCardType.none:
         return '';
     }
   }

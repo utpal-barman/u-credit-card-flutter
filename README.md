@@ -29,7 +29,7 @@ Add `u_credit_card` to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  u_credit_card: ^1.0.6
+  u_credit_card: ^1.0.7
 ```
 
 Install it:
@@ -150,7 +150,6 @@ CreditCardUi(
 ),
 ```
 
-If you want to disable the card logo you can pass `disableShowingCardLogo: true`, but this property was introduced after v1.0.6
 
 #### Additional Customizations
 To further customize the card, you can add a background image by using the `backgroundDecorationImage` property. Additionally, you can include a logo for the card provider using the `cardProviderLogo` property. This logo can be positioned on either the left or the right side of the card using the `cardProviderLogoPosition` property.
