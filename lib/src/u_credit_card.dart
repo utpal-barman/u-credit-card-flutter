@@ -25,6 +25,24 @@ enum CardType {
   other,
 }
 
+/// Types of payment network
+enum CreditCardType {
+  /// VISA
+  visa,
+
+  /// Mastercard
+  mastercard,
+
+  /// AMEX
+  amex,
+
+  /// Discover
+  discover,
+
+  /// None
+  none,
+}
+
 /// Position of the Card Provider logo
 /// Left or Right in the top part of the card
 enum CardProviderLogoPosition {
@@ -53,9 +71,11 @@ class CreditCardUi extends StatelessWidget {
     this.scale = 1.0,
     this.placeNfcIconAtTheEnd = false,
     this.cardType = CardType.credit,
+    this.creditCardType,
     this.cardProviderLogo,
     this.cardProviderLogoPosition = CardProviderLogoPosition.right,
     this.backgroundDecorationImage,
+    @Deprecated('Use `creditCardType: CreditCardType.none` instead')
     this.disableShowingCardLogo = false,
   });
 
@@ -109,11 +129,18 @@ class CreditCardUi extends StatelessWidget {
   /// By default the value is 1.0
   final double scale;
 
-  /// Provide the type of the card.
+  /// Provide the type of the card - credit or debit
   /// By default, it's `CardType.credit`
   ///
   /// Set `CardType.other` if you don't want to set anything
   final CardType cardType;
+
+  /// Set Credit card type to set network provider logo - VISA, Mastercard, etc.
+  ///
+  /// Set `creditCardType: CreditCardType.none` to disable showing the logo.
+  /// If this value is skipped, the card will show the logo automatically
+  /// based on the `cardNumber`
+  final CreditCardType? creditCardType;
 
   /// Provide the logo of the card provider (Optional).
   final Widget? cardProviderLogo;
@@ -127,13 +154,14 @@ class CreditCardUi extends StatelessWidget {
   /// Set Background image, can support both asset and network image
   final DecorationImage? backgroundDecorationImage;
 
-  /// Disable card type logo, just set to `true`
+  /// Disable credit card type logo, just set to `true`
+  @Deprecated('Use `creditCardType: CreditCardType.none` instead')
   final bool disableShowingCardLogo;
 
   @override
   Widget build(BuildContext context) {
     final cardNumberMasked = CreditCardHelper.maskCreditCardNumber(
-      cardNumber.replaceAll(' ', ''),
+      cardNumber.replaceAll(' ', '').replaceAll('-', ''),
     );
 
     final validFromMasked = validFrom == null
@@ -152,12 +180,24 @@ class CreditCardUi extends StatelessWidget {
         );
 
     Widget cardLogoWidget;
-    final cardLogoString = CreditCardHelper.getCardLogo(cardNumberMasked);
-    if (disableShowingCardLogo || cardLogoString.isEmpty) {
+    final cardLogoString = CreditCardHelper.getCardLogoFromCardNumber(
+      cardNumber: cardNumberMasked,
+    );
+
+    if (disableShowingCardLogo ||
+        cardLogoString.isEmpty ||
+        creditCardType == CreditCardType.none) {
       cardLogoWidget = const SizedBox.shrink();
+    } else if (creditCardType != null) {
+      cardLogoWidget = Image.asset(
+        CreditCardHelper.getCardLogoFromType(creditCardType: creditCardType!),
+        package: UiConstants.packageName,
+      );
     } else {
       cardLogoWidget = Image.asset(
-        CreditCardHelper.getCardLogo(cardNumberMasked),
+        CreditCardHelper.getCardLogoFromCardNumber(
+          cardNumber: cardNumberMasked,
+        ),
         package: UiConstants.packageName,
       );
     }
@@ -238,7 +278,9 @@ class CreditCardUi extends StatelessWidget {
                   top: 108,
                   left: 20,
                   child: CreditCardText(
-                    cardNumberMasked,
+                    cardNumberMasked.length > 20
+                        ? cardNumberMasked.substring(0, 20)
+                        : cardNumberMasked,
                   ),
                 ),
               ],

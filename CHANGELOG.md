@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.7] 🛠️
+
+### Feature
+
+- 📝 Deprecated `disableShowingCardLogo:` property
+- Added `creditCardType` to override the logo, so setting `creditCardType: CreditCardTyoe.other` to disable showing card logo
+
 ## [1.0.6] 🛠️
 
 ### Feature
