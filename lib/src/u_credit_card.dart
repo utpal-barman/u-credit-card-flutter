@@ -75,8 +75,8 @@ class CreditCardUi extends StatelessWidget {
     this.cardProviderLogo,
     this.cardProviderLogoPosition = CardProviderLogoPosition.right,
     this.backgroundDecorationImage,
-    @Deprecated('Use `creditCardType: CreditCardType.none` instead')
-    this.disableShowingCardLogo = false,
+    this.showValidFrom = true,
+    this.showValidThru = true,
   });
 
   /// Full Name of the Card Holder.
@@ -95,6 +95,18 @@ class CreditCardUi extends StatelessWidget {
   ///
   /// Example 01/28, here 01 means month January & 28 means year 2028.
   final String validThru;
+
+  /// Determines whether to show the "Valid From" segment on the card.
+  ///
+  /// If set to `true`, the "Valid From" segment will be displayed.
+  /// If set to `false`, it will be hidden. The default value is `true`.
+  final bool showValidFrom;
+
+  /// Determines whether to show the "Valid Thru" segment on the card.
+  ///
+  /// If set to `true`, the "Valid Thru" segment will be displayed.
+  /// If set to `false`, it will be hidden. The default value is `true`.
+  final bool showValidThru;
 
   /// Top Left Color for the Gradient,
   /// by default it's `Colors.purple`.
@@ -154,10 +166,6 @@ class CreditCardUi extends StatelessWidget {
   /// Set Background image, can support both asset and network image.
   final DecorationImage? backgroundDecorationImage;
 
-  /// Disable credit card type logo, just set to `true`.
-  @Deprecated('Use `creditCardType: CreditCardType.none` instead')
-  final bool disableShowingCardLogo;
-
   @override
   Widget build(BuildContext context) {
     final cardNumberMasked = CreditCardHelper.maskCreditCardNumber(
@@ -184,9 +192,7 @@ class CreditCardUi extends StatelessWidget {
       cardNumber: cardNumberMasked,
     );
 
-    if (disableShowingCardLogo ||
-        cardLogoString.isEmpty ||
-        creditCardType == CreditCardType.none) {
+    if (cardLogoString.isEmpty || creditCardType == CreditCardType.none) {
       cardLogoWidget = const SizedBox.shrink();
     } else if (creditCardType != null) {
       cardLogoWidget = Image.asset(
@@ -250,6 +256,8 @@ class CreditCardUi extends StatelessWidget {
                   child: CreditCardValidityView(
                     validFromMasked: validFromMasked,
                     validThruMasked: validThruMasked,
+                    showValidFrom: showValidFrom,
+                    showValidThru: showValidThru,
                   ),
                 ),
                 Positioned(

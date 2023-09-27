@@ -2,80 +2,87 @@
 
 All notable changes to this project will be documented in this file.
 
-## [1.0.7] 🛠️
+## [1.1.0] 🚀
 
-### Feature
+### Features
 
-- 📝 Deprecated `disableShowingCardLogo:` property
-- Added `creditCardType` to override the logo, so setting `creditCardType: CreditCardTyoe.none` to disable showing card logo
+- ✨ Added the ability to `showValidFrom` and `showValidThru` to hide and show the dates.
+- `disableShowingCardLogo` has been completely removed. To achieve the same effect, use `creditCardType: CreditCardType.none` instead.
+
+## [1.0.7] 🔄
+
+### Features
+
+- 🚀 Deprecated `disableShowingCardLogo:` property.
+- ✨ Added `creditCardType` to override the logo. You can now set `creditCardType: CreditCardType.none` to disable showing the card logo.
 
 ## [1.0.6] 🛠️
 
-### Feature
+### Features
 
-- 📝 Added `disableShowingCardLogo:` property to hide the card logo
+- ✨ Added `disableShowingCardLogo:` property to hide the card logo.
 
 ## [1.0.5] 🛠️
 
-### Improvement
+### Improvements
 
-- 📝 Readme improved
+- 📝 Improved the readme.
+
 ## [1.0.4] 🛠️
 
-### Fixed
+### Fixes
 
-- 📝 Card numbers with space bug is fixed
+- 🐛 Fixed a bug with card numbers containing spaces.
 
 ## [1.0.3] 🛠️
 
-### Fixed
+### Fixes
 
-- 📝 Card number length is now flexible
-- 🚀 Optimized grouping algorithm for improved performance and accuracy
-
+- 🐛 Made card number length flexible.
+- 🚀 Optimized the grouping algorithm for improved performance and accuracy.
 
 ## [1.0.2] 🖼️
 
-### Added
+### Additions
 
-- 📝 Added Background image on card feature
-- 📝 Added Card company logo adding feature
-- 📝 Type of card can be now specified
+- 📸 Added the background image on card feature.
+- 🏢 Added the ability to specify the card company logo.
+- 🆔 Type of card can now be specified.
 
 ## [1.0.1] 📗
 
-### Added
+### Additions
 
-- 📝 Updated metadata
+- 📝 Updated metadata.
 
 ## [1.0.0+5] 👏
 
-### Added
+### Additions
 
-- 📝 Updated Documentation
+- 📚 Updated documentation.
 
 ## [1.0.0+4] 🚀
 
-### Added
+### Additions
 
-- 📝 Updated Documentation
-- 🎉 Added new property `placeNfcIconAtTheEnd` to place NFC icon at the opposite side of the Chip
-- 💄 Chip placed in the correct place
+- 📚 Updated documentation.
+- 🎉 Added the new property `placeNfcIconAtTheEnd` to place the NFC icon at the opposite side of the Chip.
+- 💄 Correctly placed the Chip.
 
 ## [1.0.0+3] 🎉
 
-### Added
+### Additions
 
-- 📝 Added image in `README.md` file
+- 📸 Added an image in the `README.md` file.
 
 ## [1.0.0+2] 📝
 
-### Added
+### Additions
 
-- 📝 Updated Documentation
+- 📚 Updated documentation.
 
 ## [1.0.0+1] 🚀
 
-### Added
+### Additions
 
-- 🎉 Initial public release
+- 🎉 Initial public release.

@@ -29,7 +29,7 @@ Add `u_credit_card` to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  u_credit_card: ^1.0.7
+  u_credit_card: ^1.1.0
 ```
 
 Install it:
@@ -78,7 +78,10 @@ This will create a credit card user interface with the cardholder's name, card n
 | `creditCardType`                  | `CreditCardType`                 | Specify the type of the credit card payment network logo to display. You can set it to `CreditCardType.none` if you prefer not to specify a card type and not show on the card UI. This is optional.                              |
 | `cardProviderLogo`          | `Widget`                   | Provide a widget for the logo of the card provider. If this parameter is not set, the card will be displayed without a logo. This is optional.                                                                          |
 | `cardProviderLogoPosition`  | `CardProviderLogoPosition` | Set the position of the card provider logo on the card. The default value is `CardProviderLogoPosition.right`. You can set it to `CardProviderLogoPosition.left` or `CardProviderLogoPosition.right`. This is optional. |
-| `backgroundDecorationImage` | `DecorationImage`          | Set a background image for the card. This parameter supports both asset and network images. If this parameter is not set, the card will be displayed without a background image. This is optional.                      |
+| `backgroundDecorationImage` | `DecorationImage`          | Set a background image for the card. This parameter supports both asset and network images. If this parameter is not set, the card will be displayed without a background image. This is optional. 
+| `showValidThru`             | `bool`                     | Indicates whether to show the "Valid Thru" section on the card. If set to `false`, the "Valid Thru" section will be hidden. By default, this value is `true`.                                                               |
+| `showValidFrom`             | `bool`                     | Indicates whether to show the "Valid From" section on the card. If set to `false`, the "Valid From" section will be hidden. By default, this value is `true`.                                                               |
+                     
 
 #### Example
 ``` dart
