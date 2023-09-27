@@ -81,7 +81,7 @@ This will create a credit card user interface with the cardholder's name, card n
 | `backgroundDecorationImage` | `DecorationImage`          | Set a background image for the card. This parameter supports both asset and network images. If this parameter is not set, the card will be displayed without a background image. This is optional. 
 | `showValidThru`             | `bool`                     | Indicates whether to show the "Valid Thru" section on the card. If set to `false`, the "Valid Thru" section will be hidden. By default, this value is `true`.                                                               |
 | `showValidFrom`             | `bool`                     | Indicates whether to show the "Valid From" section on the card. If set to `false`, the "Valid From" section will be hidden. By default, this value is `true`.                                                               |
-                     |
+                     
 
 #### Example
 ``` dart
