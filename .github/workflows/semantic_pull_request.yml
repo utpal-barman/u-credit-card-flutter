@@ -1,0 +1,30 @@
+name: Semantic Pull Request Workflow
+
+on:
+  workflow_call:
+    inputs:
+      types:
+        required: false
+        type: string
+      scopes:
+        required: false
+        type: string
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🤖 Ensure Commit is Semantic
+        if: github.event_name == 'pull_request'
+        uses: amannn/action-semantic-pull-request@e9fabac35e210fea40ca5b14c0da95a099eff26f # v5.4.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          types: ${{inputs.types}}
+          scopes: ${{inputs.scopes}}
+          validateSingleCommit: false
+          ignoreLabels: |
+            bot
+            ignore-semantic-pull-request
+          wip: false
