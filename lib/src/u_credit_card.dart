@@ -60,7 +60,6 @@ enum CardProviderLogoPosition {
 class CreditCardUi extends StatelessWidget {
   /// Creates Credit Card UI.
   const CreditCardUi({
-    super.key,
     required this.cardHolderFullName,
     required this.cardNumber,
     required this.validThru,
@@ -77,6 +76,7 @@ class CreditCardUi extends StatelessWidget {
     this.backgroundDecorationImage,
     this.showValidFrom = true,
     this.showValidThru = true,
+    super.key,
   });
 
   /// Full Name of the Card Holder.

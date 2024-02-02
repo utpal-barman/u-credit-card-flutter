@@ -5,8 +5,8 @@ import 'package:u_credit_card/src/ui/credit_card_text.dart';
 class CreditCardHolderNameView extends StatelessWidget {
   ///
   const CreditCardHolderNameView({
-    super.key,
     required this.cardHolderFullName,
+    super.key,
   });
 
   ///
