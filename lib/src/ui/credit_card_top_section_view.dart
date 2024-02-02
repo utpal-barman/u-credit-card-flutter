@@ -5,10 +5,10 @@ import 'package:u_credit_card/u_credit_card.dart';
 class CreditCardTopLogo extends StatelessWidget {
   ///
   const CreditCardTopLogo({
-    super.key,
     required this.cardType,
-    this.cardProviderLogo,
     required this.cardProviderLogoPosition,
+    this.cardProviderLogo,
+    super.key,
   });
 
   ///

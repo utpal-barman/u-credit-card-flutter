@@ -5,11 +5,11 @@ import 'package:u_credit_card/src/ui/credit_card_text.dart';
 class CreditCardValidityView extends StatelessWidget {
   ///
   const CreditCardValidityView({
-    super.key,
     required this.validFromMasked,
     required this.validThruMasked,
     this.showValidFrom = true,
     this.showValidThru = true,
+    super.key,
   });
 
   ///

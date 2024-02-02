@@ -6,9 +6,9 @@ import 'package:u_credit_card/src/ui/credit_card_asset_image.dart';
 class CreditCardChipNfcView extends StatelessWidget {
   ///
   const CreditCardChipNfcView({
-    super.key,
     required this.doesSupportNfc,
     required this.placeNfcIconAtTheEnd,
+    super.key,
   });
 
   ///
