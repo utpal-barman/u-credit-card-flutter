@@ -164,7 +164,7 @@ class _CreditCardBalanceViewState extends State<_CreditCardBalanceView> {
               onTap: _onBalanceViewClicked,
               child: Container(
                 decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.88),
+                  color: Colors.white.withValues(alpha: 0.88),
                   borderRadius: BorderRadius.circular(50),
                 ),
                 child: const Padding(

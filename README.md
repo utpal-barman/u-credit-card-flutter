@@ -1,4 +1,4 @@
-# 💳 u_credit_card: ^1.4.0
+# 💳 u_credit_card: ^1.5.0
 
 ## Credit Card UI as Flutter Widget 💎
 
@@ -26,7 +26,7 @@
 
    ```yaml
    dependencies:
-     u_credit_card: ^1.4.0
+     u_credit_card: ^1.5.0
    ```
 
 2. **Install** the package:

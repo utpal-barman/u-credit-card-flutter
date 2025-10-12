@@ -71,10 +71,10 @@ class CreditCardHelper {
 
     // Return the new darker color
     return Color.fromRGBO(
-      (color.red * newLuminance).toInt(),
-      (color.green * newLuminance).toInt(),
-      (color.blue * newLuminance).toInt(),
-      color.opacity,
+      ((color.r * 255.0).round() * newLuminance).toInt(),
+      ((color.g * 255.0).round() * newLuminance).toInt(),
+      ((color.b * 255.0).round() * newLuminance).toInt(),
+      color.a,
     );
   }
 
