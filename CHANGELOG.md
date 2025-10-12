@@ -2,19 +2,29 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.5.0] 🚀
+
+### Fixes
+
+- Fixed deprecation warnings by migrating to new Color API (`withValues` instead of `withOpacity`)
+- Updated color property accessors to use new API (`.r`, `.g`, `.b`, `.a` instead of deprecated `.red`, `.green`, `.blue`, `.opacity`)
+
 ## [1.4.0] 🔧
 
 ### Features
+
 - Added `shouldMaskCardNumber` parameter to control the masking of the card number.
 
 ## [1.3.1] 🐞
 
 ### Fixes
+
 - Resolved an issue with the card being invisible when no width is defined.
 
 ## [1.3.0] 🛑
 
 ### Deprecated
+
 - `scale` parameter is deprecated and will be removed in a future version. Use the `width` parameter instead.
 
 ### Features
@@ -24,6 +34,7 @@ All notable changes to this project will be documented in this file.
 ## [1.2.1] 🛠️
 
 ### Hot Fixes
+
 - Resolved asset path warnings.
 
 ## [1.2.0] 🚀
@@ -32,12 +43,12 @@ All notable changes to this project will be documented in this file.
 
 - ✨ Added the ability to show balances and flipping animations on cards.
 - Introduced new parameters:
-  - `showBalance`
-  - `balance`
-  - `cvvNumber`
-  - `enableFlipping`
-  - `autoHideBalance`
-  - `disableHapticFeedback`
+    - `showBalance`
+    - `balance`
+    - `cvvNumber`
+    - `enableFlipping`
+    - `autoHideBalance`
+    - `disableHapticFeedback`
 
 ## [1.1.0] 🚀
 
