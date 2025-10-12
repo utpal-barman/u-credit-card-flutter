@@ -83,6 +83,7 @@ CreditCardUi(
 | `disableHapticFeedBack`     | `bool`                     | Disables haptic feedback on interactions.                                                                          |
 | `width`                     | `double`                   | Width of the card, up to a max of 300.                                                                              |
 | `shouldMaskCardNumber`      | `bool`                     | Masks middle digits of the card number if set to `true`. Defaults to `true`.                                        |
+| `controller`                | `CreditCardController`     | Controller for programmatic card flipping. Optional.                                                                |
 
 ### Example
 
@@ -229,6 +230,71 @@ CreditCardUi(
 ```
 
 <img src="https://github.com/utpal-barman/u-credit-card-flutter/assets/16848599/350654f2-30c1-464b-93f2-7ed721f07792" width="432" />
+
+#### Programmatic Card Flipping
+
+You can control the card flip animation programmatically using the `CreditCardController`. This is useful when you want to flip the card in response to user actions, such as when a CVV input field gets focus.
+
+```dart
+class MyWidget extends StatefulWidget {
+  @override
+  State<MyWidget> createState() => _MyWidgetState();
+}
+
+class _MyWidgetState extends State<MyWidget> {
+  final _cardController = CreditCardController();
+  final _cvvFocusNode = FocusNode();
+
+  @override
+  void initState() {
+    super.initState();
+    // Flip to back when CVV field gets focus
+    _cvvFocusNode.addListener(() {
+      if (_cvvFocusNode.hasFocus) {
+        _cardController.flipToBack();
+      } else {
+        _cardController.flipToFront();
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _cardController.dispose();
+    _cvvFocusNode.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        CreditCardUi(
+          controller: _cardController, // 👈 Pass the controller
+          enableFlipping: true,
+          cardHolderFullName: 'John Doe',
+          cardNumber: '1234567812345678',
+          validThru: '10/24',
+          cvvNumber: '123',
+        ),
+        TextField(
+          focusNode: _cvvFocusNode,
+          decoration: InputDecoration(labelText: 'CVV'),
+        ),
+        ElevatedButton(
+          onPressed: () => _cardController.flipCard(), // Manually flip
+          child: Text('Flip Card'),
+        ),
+      ],
+    );
+  }
+}
+```
+
+The `CreditCardController` provides three methods:
+- `flipCard()`: Toggles between front and back
+- `flipToFront()`: Flips to front side (if not already showing)
+- `flipToBack()`: Flips to back side (if not already showing)
 
 ধন্যবাদ
 
