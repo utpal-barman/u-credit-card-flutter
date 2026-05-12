@@ -42,11 +42,11 @@ void main() {
 
     test('setFlipState does not notify listeners when state is same', () {
       var notificationCount = 0;
-      controller.addListener(() {
-        notificationCount++;
-      });
-
-      controller.setFlipState(isFlipped: false);
+      controller
+        ..addListener(() {
+          notificationCount++;
+        })
+        ..setFlipState(isFlipped: false);
       expect(notificationCount, 0);
 
       controller.setFlipState(isFlipped: false);
@@ -55,11 +55,11 @@ void main() {
 
     test('flipCard calls the registered callback', () {
       var callbackCalled = false;
-      controller.setFlipCallback(() {
-        callbackCalled = true;
-      });
-
-      controller.flipCard();
+      controller
+        ..setFlipCallback(() {
+          callbackCalled = true;
+        })
+        ..flipCard();
       expect(callbackCalled, true);
     });
 
@@ -70,33 +70,37 @@ void main() {
 
     test('flipToFront flips only when card is showing back', () {
       var flipCount = 0;
-      controller.setFlipCallback(() {
-        flipCount++;
-      });
+      controller
+        ..setFlipCallback(() {
+          flipCount++;
+        })
 
-      // Initially showing front (isFlipped = false)
-      controller.flipToFront();
+        // Initially showing front (isFlipped = false)
+        ..flipToFront();
       expect(flipCount, 0); // Should not flip
 
       // Set to back
-      controller.setFlipState(isFlipped: true);
-      controller.flipToFront();
+      controller
+        ..setFlipState(isFlipped: true)
+        ..flipToFront();
       expect(flipCount, 1); // Should flip to front
     });
 
     test('flipToBack flips only when card is showing front', () {
       var flipCount = 0;
-      controller.setFlipCallback(() {
-        flipCount++;
-      });
+      controller
+        ..setFlipCallback(() {
+          flipCount++;
+        })
 
-      // Initially showing front (isFlipped = false)
-      controller.flipToBack();
+        // Initially showing front (isFlipped = false)
+        ..flipToBack();
       expect(flipCount, 1); // Should flip to back
 
       // Set to back
-      controller.setFlipState(isFlipped: true);
-      controller.flipToBack();
+      controller
+        ..setFlipState(isFlipped: true)
+        ..flipToBack();
       expect(flipCount, 1); // Should not flip again
     });
 
