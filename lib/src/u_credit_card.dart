@@ -523,7 +523,7 @@ class _AnimatedFlippingCardState extends State<AnimatedFlippingCard>
 
           final transformationMatrix = Matrix4.identity()
             ..setEntry(3, 2, 0.001)
-            ..scale(clampedScale)
+            ..scaleByDouble(clampedScale, clampedScale, clampedScale, 1)
             ..rotateY(rotationValue);
 
           return Transform(
