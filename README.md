@@ -96,6 +96,7 @@ CreditCardUi(
   topLeftColor: Colors.blue,
 ),
 ```
+
 <img width="432" alt="u_credit_card_nfc_basic" src="https://user-images.githubusercontent.com/16848599/232335806-159f4873-7fcb-46e0-b559-bc5a59ab61bf.png">
 
 By default, the card will have a chic blue gradient and an NFC icon. But don't worry, if you don't want the NFC icon, simply pass `doesSupportNfc: false`.
@@ -292,6 +293,7 @@ class _MyWidgetState extends State<MyWidget> {
 ```
 
 The `CreditCardController` provides three methods:
+
 - `flipCard()`: Toggles between front and back
 - `flipToFront()`: Flips to front side (if not already showing)
 - `flipToBack()`: Flips to back side (if not already showing)
