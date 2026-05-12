@@ -6,6 +6,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:u_credit_card/src/constants/ui_constants.dart';
+import 'package:u_credit_card/src/controller/credit_card_controller.dart';
 import 'package:u_credit_card/src/ui/credit_card_chip_nfc_view.dart';
 import 'package:u_credit_card/src/ui/credit_card_holder_name_view.dart';
 import 'package:u_credit_card/src/ui/credit_card_text.dart';
@@ -95,6 +96,7 @@ class CreditCardUi extends StatelessWidget {
     this.cvvNumber = '***',
     this.disableHapticFeedBack = false,
     this.shouldMaskCardNumber = true,
+    this.controller,
   });
 
   /// Full Name of the Card Holder.
@@ -224,6 +226,21 @@ class CreditCardUi extends StatelessWidget {
   /// By default, this value is `true` and the middle digits are masked with
   /// asterisks.
   final bool shouldMaskCardNumber;
+
+  /// Controller for programmatically flipping the card.
+  ///
+  /// Use this controller to flip the card between front and back sides
+  /// programmatically. This is useful when you want to show the CVV field
+  /// when a CVV input field gets focus, for example.
+  ///
+  /// Example:
+  /// ```dart
+  /// final controller = CreditCardController();
+  ///
+  /// // Later, flip the card
+  /// controller.flipCard();
+  /// ```
+  final CreditCardController? controller;
 
   @override
   Widget build(BuildContext context) {
@@ -441,6 +458,8 @@ class CreditCardUi extends StatelessWidget {
         child: AnimatedFlippingCard(
           frontSide: frontSide,
           backSide: backSide,
+          controller: controller,
+          disableHapticFeedBack: disableHapticFeedBack,
         ),
       );
     }
@@ -457,6 +476,7 @@ class AnimatedFlippingCard extends StatefulWidget {
     required this.frontSide,
     required this.backSide,
     this.disableHapticFeedBack = false,
+    this.controller,
     super.key,
   });
 
@@ -469,6 +489,9 @@ class AnimatedFlippingCard extends StatefulWidget {
   /// A boolean to enable the haptic feedback on various actions,
   /// flipping, showing balances, etc.
   final bool? disableHapticFeedBack;
+
+  /// Controller for programmatically flipping the card
+  final CreditCardController? controller;
 
   @override
   State<AnimatedFlippingCard> createState() => _AnimatedFlippingCardState();
@@ -485,12 +508,44 @@ class _AnimatedFlippingCardState extends State<AnimatedFlippingCard>
       vsync: this,
       duration: Durations.medium3,
     );
+
+    // Register the flip callback with the controller
+    widget.controller?.setFlipCallback(_flip);
+
+    // Listen to animation changes to update controller state
+    _animationController.addListener(_updateControllerState);
+  }
+
+  @override
+  void didUpdateWidget(AnimatedFlippingCard oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.controller != oldWidget.controller) {
+      oldWidget.controller?.setFlipCallback(() {});
+      widget.controller?.setFlipCallback(_flip);
+    }
   }
 
   @override
   void dispose() {
-    _animationController.dispose();
+    _animationController
+      ..removeListener(_updateControllerState)
+      ..dispose();
+    widget.controller?.setFlipCallback(() {});
     super.dispose();
+  }
+
+  void _updateControllerState() {
+    widget.controller?.setFlipState(
+      isFlipped: _animationController.value >= 0.5,
+    );
+  }
+
+  void _flip() {
+    if (_animationController.value == 0) {
+      _animationController.animateTo(1);
+    } else {
+      _animationController.animateTo(0);
+    }
   }
 
   @override
@@ -507,11 +562,7 @@ class _AnimatedFlippingCardState extends State<AnimatedFlippingCard>
           // Do something
         }
 
-        if (_animationController.value == 0) {
-          _animationController.animateTo(1);
-        } else {
-          _animationController.animateTo(0);
-        }
+        _flip();
       },
       child: AnimatedBuilder(
         animation: _animationController,
@@ -523,7 +574,7 @@ class _AnimatedFlippingCardState extends State<AnimatedFlippingCard>
 
           final transformationMatrix = Matrix4.identity()
             ..setEntry(3, 2, 0.001)
-            ..scale(clampedScale)
+            ..scaleByDouble(clampedScale, clampedScale, clampedScale, 1)
             ..rotateY(rotationValue);
 
           return Transform(

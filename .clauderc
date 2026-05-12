@@ -1,0 +1,46 @@
+# Claude Code Memory & Guidelines
+
+## Project-Specific Restrictions
+
+### Git Commit Guidelines
+
+- ❌ **NEVER** add "Co-Authored-By: Claude <noreply@anthropic.com>" to commits
+- ❌ **NEVER** add "🤖 Generated with [Claude Code](https://claude.com/claude-code)" to commits
+- ✅ Use clean, professional commit messages without AI attribution
+
+### Testing Guidelines
+
+- ❌ **NEVER** modify existing test files unless explicitly requested
+- ✅ **ALWAYS** create new test files for new features
+- ✅ **ALWAYS** write tests after completing a feature implementation
+- ✅ **ALWAYS** run `flutter analyze` after completing any plan
+- ✅ **ALWAYS** run `flutter test` after completing any plan
+
+### Version Management
+
+- ✅ **ALWAYS** update both `pubspec.yaml` AND `README.md` versions together
+- ✅ When bumping package version in `pubspec.yaml`, ensure README.md header and installation section match the same version
+- ✅ Check both locations:
+    - README.md line 1: `# 💳 u_credit_card: ^X.X.X`
+    - README.md installation section: `u_credit_card: ^X.X.X`
+
+### Code Quality Workflow
+
+1. Complete the implementation
+2. Write tests for the feature (in new test file)
+3. Run `flutter analyze` and fix any issues
+4. Run `flutter test` and ensure all tests pass
+5. Only then commit the changes
+
+### Pull Request Guidelines
+
+- ❌ **NEVER** include AI attribution in PR descriptions
+- ✅ Focus on technical details and implementation
+- ✅ Include clear summary, changes, and test results
+
+## General Best Practices
+
+- Follow existing code style and patterns in the project
+- Use `very_good_analysis` linting rules
+- Keep test coverage comprehensive
+- Document public APIs clearly
