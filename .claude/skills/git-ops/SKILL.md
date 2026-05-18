@@ -39,7 +39,9 @@ Every commit message uses this shape:
 | `style` | Formatting, whitespace, lint fixes that don't touch logic |
 | `build` | Build system, gradle, pubspec build config |
 | `ci` | GitHub Actions, workflows |
-| `release` | Version bump commits (`release: Bump to vX.Y.Z`) |
+| `revert` | Reverts a previous commit |
+
+For version-bump commits, use `chore(release): bump to vX.Y.Z`. Don't invent a custom `release:` type — the repo's PR title lint (`amannn/action-semantic-pull-request`) only accepts the canonical types above, and keeping commit titles aligned with PR titles avoids divergence at merge time.
 
 **Scope** is optional but encouraged when it clarifies the area. Examples from this repo: `feat(controller):`, `chore(deps):`, `refactor(test):`, `chore(example):`, `docs(readme):`. Skip scope only when the change is genuinely cross-cutting.
 

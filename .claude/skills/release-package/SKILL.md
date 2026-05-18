@@ -138,11 +138,11 @@ If the release introduces a new public API (e.g. a new controller), also check w
 
 ```bash
 git add pubspec.yaml CHANGELOG.md README.md
-git commit -m "release: Bump to vX.Y.Z"
+git commit -m "chore(release): bump to vX.Y.Z"
 git push -u origin release/vX.Y.Z
 ```
 
-Commit message follows the existing pattern in `git log` (`release: Bumped to v1.3.1`, `release: Bump to 1.2.2`). Use `release: Bump to vX.Y.Z` going forward — consistent prefix, with leading `v`.
+Use `chore(release): bump to vX.Y.Z` for both the commit and the PR title. The repo's older history uses bare `release: ...` but the PR title lint (`amannn/action-semantic-pull-request`) rejects that — `chore(release):` keeps commit and PR title aligned and passes the check. See [[pr-title-lint]] and [[git-ops-skill]].
 
 Open the PR against `develop` and request review from `utpal-barman`:
 
@@ -150,8 +150,9 @@ Open the PR against `develop` and request review from `utpal-barman`:
 gh pr create \
   --base develop \
   --head release/vX.Y.Z \
-  --title "release: vX.Y.Z" \
+  --title "chore(release): bump to vX.Y.Z" \
   --reviewer utpal-barman \
+  --assignee utpal-barman \
   --body "$(cat <<'EOF'
 ## Release vX.Y.Z
 
@@ -197,6 +198,10 @@ Do not run these yourself. Tagging an unmerged commit, or pushing a tag the user
 - **`develop` is behind a feature branch the user thinks is "the release".** Tell them: the work must be merged to `develop` first; releases come from `develop`. Offer to wait or to help open the feature PR first.
 - **Pre-1.0 / hotfix off `main`.** Not supported by this skill yet — fall back to manual and tell the user.
 
+## Reviewer vs. assignee
+
+The release PR's reviewer should be `@utpal-barman` — but if the PR author *is* `utpal-barman` (the usual case), GitHub silently drops the self-review-request. In that case fall back to `--assignee utpal-barman` so the PR still surfaces on their dashboard. The `gh pr create` invocation above passes both flags; the reviewer flag becomes a no-op when self, and the assignee flag does the real work.
+
 ## What success looks like
 
-A single commit on `release/vX.Y.Z` that touches exactly `pubspec.yaml`, `CHANGELOG.md`, and `README.md`; a PR titled `release: vX.Y.Z` against `develop` with `@utpal-barman` requested as reviewer; and a clear next-step instruction for the user to tag after merge. Nothing else changes.
+A single commit on `release/vX.Y.Z` that touches exactly `pubspec.yaml`, `CHANGELOG.md`, and `README.md`; a PR titled `chore(release): bump to vX.Y.Z` against `develop` with `@utpal-barman` as reviewer (or assignee if self); and a clear next-step instruction for the user to tag after merge. Nothing else changes.
