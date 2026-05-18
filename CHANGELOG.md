@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.6.0] 🚀
+
+### Features
+
+- Added `CreditCardController` for programmatic card flipping — call `controller.flip()`, `flipToFront()`, or `flipToBack()` from anywhere in your widget tree to drive the flip animation without user interaction.
+
 ## [1.5.0] 🚀
 
 ### Fixes
