@@ -39,17 +39,22 @@ class CreditCardController extends ChangeNotifier {
   /// This is set internally by the widget and should not be called directly.
   VoidCallback? _flipCallback;
 
-  /// Sets the flip callback.
+  /// Registers the widget's flip action with this controller.
   ///
-  /// This is used internally by the widget to register the flip action.
+  /// Called by `CreditCardUi` during build to wire its internal animation
+  /// up to [flipCard]. Application code should not call this directly.
+  @internal
   // ignore: use_setters_to_change_properties
   void setFlipCallback(VoidCallback callback) {
     _flipCallback = callback;
   }
 
-  /// Sets the current flip state.
+  /// Syncs the controller's flip state with the widget's animation.
   ///
-  /// This is used internally by the widget to sync the state.
+  /// Called by `CreditCardUi` as the flip animation progresses so listeners
+  /// see [isFlipped] update in real time. Application code should not call
+  /// this directly — use [flipCard], [flipToFront], or [flipToBack].
+  @internal
   void setFlipState({required bool isFlipped}) {
     if (_isFlipped != isFlipped) {
       _isFlipped = isFlipped;
