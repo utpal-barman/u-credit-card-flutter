@@ -56,7 +56,7 @@ enum CardProviderLogoPosition {
   /// Set the logo to the left side.
   left,
 
-  /// Set the logo to the left side.
+  /// Set the logo to the right side.
   right;
 
   /// Find if the logo is set to left or not.
@@ -134,10 +134,10 @@ class CreditCardUi extends StatelessWidget {
   /// Tip: Avoid light colors, because texts are now white.
   final Color topLeftColor;
 
-  /// Bottom Left Color for the Gradient,
-  /// by default it's deeper version of `topLeftColor`.
+  /// Bottom Right Color for the Gradient,
+  /// by default it's a darker shade of `topLeftColor`.
   ///
-  /// Tip: Avoid light colors, because texts are now white.
+  /// Tip: Avoid light colors, because texts are rendered in white.
   final Color? bottomRightColor;
 
   /// Shows a NFC icon to tell user if the card supports NFC feature.
@@ -468,10 +468,13 @@ class CreditCardUi extends StatelessWidget {
   }
 }
 
+/// Internal widget that renders the card with a horizontal-drag flip
+/// animation, optionally driven by a [CreditCardController].
 ///
-
+/// You normally don't instantiate this directly — pass `enableFlipping: true`
+/// (and optionally a [CreditCardController]) to [CreditCardUi] instead.
 class AnimatedFlippingCard extends StatefulWidget {
-  ///
+  /// Creates an [AnimatedFlippingCard].
   const AnimatedFlippingCard({
     required this.frontSide,
     required this.backSide,

@@ -1,6 +1,6 @@
-# 💳 u_credit_card: ^1.6.0
+# u_credit_card
 
-## Credit Card UI as Flutter Widget 💎
+A Flutter widget that renders a realistic, customizable credit-card UI with optional flip animation, balance display, and provider-logo support.
 
 [![pub package](https://img.shields.io/pub/v/u_credit_card.svg?logo=dart&logoColor=00b9fc)](https://pub.dartlang.org/packages/u_credit_card)
 [![Last Commits](https://img.shields.io/github/last-commit/utpal-barman/u-credit-card-flutter?logo=git&logoColor=white)](https://github.com/utpal-barman/u-credit-card-flutter/commits/main)
@@ -8,248 +8,211 @@
 [![Code size](https://img.shields.io/github/languages/code-size/utpal-barman/u-credit-card-flutter?logo=github&logoColor=white)](https://github.com/utpal-barman/u-credit-card-flutter)
 [![License](https://img.shields.io/github/license/utpal-barman/u-credit-card-flutter?logo=open-source-initiative&logoColor=green)](https://github.com/utpal-barman/u-credit-card-flutter/blob/main/LICENSE)
 
-🔥 **u_credit_card** is a Flutter package for creating customizable and realistic-looking credit card UI with engaging animations. Elevate the visual appeal of your app and improve user interaction effortlessly!
-
 <p align="center">
-<img src="https://user-images.githubusercontent.com/16848599/233195178-b4fb8007-ba2e-48ed-8020-7a0854d5038c.png" width="700"/>
+<img src="https://user-images.githubusercontent.com/16848599/233195178-b4fb8007-ba2e-48ed-8020-7a0854d5038c.png" width="700" alt="u_credit_card preview"/>
 </p>
 
-## Resources 📚
+## Contents
 
-- [Documentation](https://pub.dev/documentation/u_credit_card/latest/u_credit_card/CreditCardUi-class.html)
-- [Pub Package](https://pub.dev/packages/u_credit_card)
-- [GitHub Repository](https://github.com/utpal-barman/u-credit-card-flutter)
+- [Features](#features)
+- [What it is / What it isn't](#what-it-is--what-it-isnt)
+- [Installation](#installation)
+- [Quick start](#quick-start)
+- [Recipes](#recipes)
+  - [Custom gradient](#custom-gradient)
+  - [Sizing the card](#sizing-the-card)
+  - [Card type and network logo](#card-type-and-network-logo)
+  - [Provider logo and background image](#provider-logo-and-background-image)
+  - [Balance display](#balance-display)
+  - [Flipping the card](#flipping-the-card)
+- [Programmatic flipping API](#programmatic-flipping-api)
+- [Parameters reference](#parameters-reference)
+- [Migration notes](#migration-notes)
+- [Compatibility](#compatibility)
+- [Contributing](#contributing)
+- [License](#license)
 
-## Installation 💻
+## Features
 
-1. **Add** `u_credit_card` to your `pubspec.yaml`:
+- **Realistic card UI** with chip, NFC indicator, gradient background, and OCR-A font for card numbers.
+- **Automatic network detection** for Visa, Mastercard, American Express, and Discover from the card number; can also be set explicitly or hidden.
+- **Card types** — credit, debit, prepaid, gift card, or none.
+- **Flippable card** — horizontal drag gesture flips between front and CVV-bearing back side; optional programmatic control via `CreditCardController`.
+- **Balance display** with optional "tap to reveal" mode (auto-hides after 2 seconds).
+- **Customizable** gradient colors, provider logo (any `Widget`), provider logo position, background image, card width, and card-number masking.
+- **No third-party dependencies** at runtime.
 
-   ```yaml
-   dependencies:
-     u_credit_card: ^1.6.0
-   ```
+## What it is / What it isn't
 
-2. **Install** the package:
+| It is | It isn't |
+|---|---|
+| A presentation-layer widget for displaying card details | A card-number or CVV validator |
+| Useful for wallets, dashboards, fintech mockups | A payment-processing or tokenization library |
+| Pure Dart + Flutter, no platform channels | A PCI-compliant input form |
 
-   ```sh
-   flutter packages get
-   ```
+If you need card-input form fields or Luhn validation as part of a payment flow, pair this widget with a dedicated forms or payments package.
 
-## Usage
+## Installation
 
-To use the `CreditCardUi()` widget, import the package:
+Add the dependency to your `pubspec.yaml`:
+
+```yaml
+dependencies:
+  u_credit_card: ^1.6.0
+```
+
+Then fetch it:
+
+```sh
+flutter pub get
+```
+
+Import it where you need it:
 
 ```dart
 import 'package:u_credit_card/u_credit_card.dart';
 ```
 
-Create a `CreditCardUi(...)` widget with the required parameters:
+## Quick start
+
+The widget needs three values: cardholder name, card number, and the "Valid Thru" date.
 
 ```dart
 CreditCardUi(
   cardHolderFullName: 'John Doe',
   cardNumber: '1234567812345678',
   validThru: '10/24',
-),
+)
 ```
 
 <img width="432" alt="u_credit_card_basic_setup" src="https://user-images.githubusercontent.com/16848599/232335773-5e6fdd6e-a4d9-4c01-a202-48cbca935cbe.png">
 
----
+By default, the card is purple, shows the NFC icon next to the chip, and masks the middle digits of the card number.
 
-## Parameters
+## Recipes
 
-| Name                        | Type                       | Description                                                                                                         |
-|-----------------------------|----------------------------|---------------------------------------------------------------------------------------------------------------------|
-| `cardHolderFullName`        | `String`                   | The cardholder's full name. **Required**.                                                                           |
-| `cardNumber`                | `String`                   | The full credit card number. **Required**.                                                                          |
-| `validThru`                 | `String`                   | The expiration date in "MM/YY" format. **Required**.                                                                |
-| `validFrom`                 | `String`                   | The "Valid From" date in "MM/YY" format. Optional.                                                                  |
-| `topLeftColor`              | `Color`                    | Top-left gradient color. Defaults to `Colors.purple`.                                                               |
-| `bottomRightColor`          | `Color`                    | Bottom-right gradient color. Defaults to a darker shade of `topLeftColor`.                                          |
-| `doesSupportNfc`            | `bool`                     | Displays NFC icon if set to `true`. Defaults to `true`.                                                             |
-| `placeNfcIconAtTheEnd`      | `bool`                     | Places NFC icon at the opposite side of the chip if set to `true`. Defaults to `false`.                             |
-| `cardType`                  | `CardType`                 | Specifies card type. Defaults to `CardType.credit`. You can set it to `CardType.other` if you prefer not to specify a card type. This is optional.                                                               |
-| `creditCardType`            | `CreditCardType`           | Specifies the credit card payment network logo. You can set it to `CreditCardType.none` if you prefer not to specify a card type and not show on the card UI. This is optional.                                                           |
-| `cardProviderLogo`          | `Widget`                   | Adds a provider logo. Optional.                                                                                     |
-| `backgroundDecorationImage` | `DecorationImage`          | Sets a background image. Optional.                                                                                  |
-| `showValidThru`             | `bool`                     | Toggles "Valid Thru" section. Defaults to `true`.                                                                   |
-| `currencySymbol`            | `String`                   | Currency symbol. Defaults to `$`.                                                                                   |
-| `balance`                   | `double`                   | Balance amount. Defaults to `0.0`.                                                                                  |
-| `showBalance`               | `bool`                     | Toggles the balance display. Defaults to `false`.                                                                   |
-| `enableFlipping`            | `bool`                     | Enables card flipping. Defaults to `false`.                                                                         |
-| `autoHideBalance`           | `bool`                     | Hides balance with a placeholder until tapped. Defaults to `false`.                                                 |
-| `cvvNumber`                 | `String`                   | CVV number shown as `***`.                                                                                         |
-| `disableHapticFeedBack`     | `bool`                     | Disables haptic feedback on interactions.                                                                          |
-| `width`                     | `double`                   | Width of the card, up to a max of 300.                                                                              |
-| `shouldMaskCardNumber`      | `bool`                     | Masks middle digits of the card number if set to `true`. Defaults to `true`.                                        |
-| `controller`                | `CreditCardController`     | Controller for programmatic card flipping. Optional.                                                                |
+Each recipe builds on the quick-start example and shows only the parameters that change.
 
-### Example
+### Custom gradient
+
+Set `topLeftColor` and `bottomRightColor` to control the gradient. If you omit `bottomRightColor`, a darker shade of `topLeftColor` is used automatically.
 
 ```dart
-CreditCardUi(
-  cardHolderFullName: 'John Doe',
-  cardNumber: '1234567812345678',
-  validFrom: '01/23',
-  validThru: '01/28',
-  topLeftColor: Colors.blue,
-),
-```
-
-<img width="432" alt="u_credit_card_nfc_basic" src="https://user-images.githubusercontent.com/16848599/232335806-159f4873-7fcb-46e0-b559-bc5a59ab61bf.png">
-
-By default, the card will have a chic blue gradient and an NFC icon. But don't worry, if you don't want the NFC icon, simply pass `doesSupportNfc: false`.
-
-Want to switch things up and place the NFC icon on the opposite side of the chip? No problem! Just enable it by passing `placeNfcIconAtTheEnd: true`, but remember to also pass `doesSupportNfc: true`.
-
-Let's make your app look as sleek as that shiny new credit card!
-
-``` dart
-CreditCardUi(
-    cardHolderFullName: 'John Doe',
-    cardNumber: '1234567812345678',
-    validFrom: '01/23',
-    validThru: '01/28',
-    topLeftColor: Colors.blue,
-    doesSupportNfc: true,
-    placeNfcIconAtTheEnd: true, // 👈 NFC icon will be at the end,
-),
-```
-
-<img width="432" alt="u_credit_card_nfc" src="https://user-images.githubusercontent.com/16848599/232332749-92d270b6-786d-4cb4-bc80-71654ce6fd56.png">
-
-#### Custom Gradient
-
-``` dart
 CreditCardUi(
   cardHolderFullName: 'John Doe',
   cardNumber: '1234567812345678',
   validThru: '10/24',
   topLeftColor: Colors.red,
   bottomRightColor: Colors.purpleAccent,
-),
+)
 ```
-
-This will create a credit card user interface with a red-to-purple gradient.
 
 <img width="432" alt="u_credit_card_gradient" src="https://user-images.githubusercontent.com/16848599/232333158-e0a3f488-cb36-4142-91a7-12d7d9546fca.png">
 
-#### Setting the card width
+Because card text is rendered in white, avoid light gradient colors.
 
-If you want to set the width of the card, use `width:` property.
-Better NOT wrap with `SizedBox(width: ..., child: CreditCardUi(....))`, instead use `width:` right from the `CreditCardUi()`
+### Sizing the card
 
-``` dart
+Use the `width` parameter rather than wrapping the widget in a `SizedBox`. The card is laid out at its natural width of 300 logical pixels and scales proportionally to fit `width`. Values above 300 are clamped.
+
+```dart
 CreditCardUi(
-  width: 300, // 👈 this will set the width of the card
+  width: 240,
   cardHolderFullName: 'John Doe',
   cardNumber: '1234567812345678',
   validThru: '10/24',
-  topLeftColor: Colors.red,
-  bottomRightColor: Colors.purpleAccent,
-),
+)
 ```
 
-Note: Setting up any value more than 300 is not considered, maximum width can be 300 only.
+### Card type and network logo
 
-#### Additional Customizations
+`cardType` controls the small label at the top of the card (CREDIT, DEBIT, PREPAID, GIFT CARD); pass `CardType.other` to hide the label.
 
-To further customize the card, you can add a background image by using the `backgroundDecorationImage` property. Additionally, you can include a logo for the card provider using the `cardProviderLogo` property. This logo can be positioned on either the left or the right side of the card using the `cardProviderLogoPosition` property.
+`creditCardType` controls the network logo (Visa, Mastercard, Amex, Discover). If omitted, the widget auto-detects the network from `cardNumber`. Pass `CreditCardType.none` to hide the logo entirely.
 
-If you want to specify a particular card type to display, you can set it using the `cardType` property. If you prefer not to specify a card type, you can set `cardType: CardType.other`.
-
-Here is an example of how to use these customization options:
-
-Example:
-
-``` dart
+```dart
 CreditCardUi(
-    cardHolderFullName: 'John Doe',
-    cardNumber: '1234567812345678',
-    validFrom: '01/23',
-    validThru: '01/28',
-    topLeftColor: Colors.blue,
-    doesSupportNfc: true,
-    placeNfcIconAtTheEnd: true,
-    cardType: CardType.debit,
-    cardProviderLogo: FlutterLogo(), // 👈 Set your logo here, supports any widget
-    cardProviderLogoPosition: CardProviderLogoPosition.right,
-    backgroundDecorationImage: DecorationImage(
+  cardHolderFullName: 'John Doe',
+  cardNumber: '4111111111111111',  // detected as Visa
+  validThru: '10/24',
+  cardType: CardType.debit,
+  // creditCardType: CreditCardType.mastercard, // optional override
+)
+```
+
+### Provider logo and background image
+
+`cardProviderLogo` accepts any widget — typically your bank or wallet logo. Position it on the left or right of the card-type label with `cardProviderLogoPosition`. Add a background image with `backgroundDecorationImage`; both `NetworkImage` and `AssetImage` are supported.
+
+```dart
+CreditCardUi(
+  cardHolderFullName: 'John Doe',
+  cardNumber: '1234567812345678',
+  validThru: '10/24',
+  cardProviderLogo: const FlutterLogo(),
+  cardProviderLogoPosition: CardProviderLogoPosition.right,
+  backgroundDecorationImage: const DecorationImage(
     fit: BoxFit.cover,
-    image: NetworkImage( // 👈 `AssetImage` is also supported
-        'https://....',
-      ),
-    ),
-),
+    image: NetworkImage('https://example.com/card-bg.png'),
+  ),
+)
 ```
 
-<img width="432" alt="Screenshot_2023-04-20_at_2 02 42_AM-removebg-preview" src="https://user-images.githubusercontent.com/16848599/233195568-5a197e2b-115c-46b1-876c-3428726f38cb.png">
+<img width="432" alt="u_credit_card_custom" src="https://user-images.githubusercontent.com/16848599/233195568-5a197e2b-115c-46b1-876c-3428726f38cb.png">
 
-To display the balance of your card, simply set `showBalance: true` and provide the balance amount using `balance: 200.0` (any double value). Enabling `autoHideBalance: true` will generate a placeholder labeled "Tap to see balance". Users can then tap on this placeholder to reveal the balance.
+### Balance display
+
+Set `showBalance: true` and pass a `balance` to render the amount in the top-left of the card. Enabling `autoHideBalance: true` replaces the figure with a "TAP TO SEE BALANCE" placeholder; tapping reveals it for two seconds. `currencySymbol` defaults to `$`.
 
 ```dart
 CreditCardUi(
-    cardHolderFullName: 'John Doe',
-    cardNumber: '1234567812345678',
-    validFrom: '01/23',
-    validThru: '01/28',
-    topLeftColor: Colors.blue,
-    doesSupportNfc: true,
-    placeNfcIconAtTheEnd: true,
-    cardType: CardType.debit,
-    cardProviderLogo: FlutterLogo(),
-    cardProviderLogoPosition: CardProviderLogoPosition.right,
-    showBalance: true,
-    balance: 128.32434343,
-    autoHideBalance: true,
-),
+  cardHolderFullName: 'John Doe',
+  cardNumber: '1234567812345678',
+  validThru: '10/24',
+  showBalance: true,
+  balance: 128.32,
+  autoHideBalance: true,
+  currencySymbol: '€',
+)
 ```
 
-#### Card Flipping Animation
+### Flipping the card
 
-To enable the flipping animation by default, simply set the property `enableFlipping: true`. You can set CVV by `cvvNumber: 000`.
+Set `enableFlipping: true` to render a back side (with the CVV) and enable a horizontal-drag gesture that flips between sides. Provide the CVV with `cvvNumber`.
 
 ```dart
 CreditCardUi(
-    cardHolderFullName: 'John Doe',
-    cardNumber: '1234567812345678',
-    validFrom: '01/23',
-    validThru: '01/28',
-    topLeftColor: Colors.blue,
-    doesSupportNfc: true,
-    placeNfcIconAtTheEnd: true,
-    cardType: CardType.debit,
-    cardProviderLogo: FlutterLogo(),
-    cardProviderLogoPosition: CardProviderLogoPosition.right,
-    showBalance: true,
-    balance: 128.32434343,
-    autoHideBalance: true,
-    enableFlipping: true, // 👈 Enables the flipping
-    cvvNumber: '123', // 👈 CVV number to be shown on the back of the card
-),
+  cardHolderFullName: 'John Doe',
+  cardNumber: '1234567812345678',
+  validThru: '10/24',
+  enableFlipping: true,
+  cvvNumber: '123',
+)
 ```
 
-<img src="https://github.com/utpal-barman/u-credit-card-flutter/assets/16848599/350654f2-30c1-464b-93f2-7ed721f07792" width="432" />
+<img src="https://github.com/utpal-barman/u-credit-card-flutter/assets/16848599/350654f2-30c1-464b-93f2-7ed721f07792" width="432" alt="u_credit_card flipping animation"/>
 
-#### Programmatic Card Flipping
+Haptic feedback fires on each flip; disable it with `disableHapticFeedBack: true`.
 
-You can control the card flip animation programmatically using the `CreditCardController`. This is useful when you want to flip the card in response to user actions, such as when a CVV input field gets focus.
+## Programmatic flipping API
+
+For flows that need to flip the card in response to UI events — for example, flipping to the back when a CVV input field gains focus — attach a `CreditCardController`.
 
 ```dart
-class MyWidget extends StatefulWidget {
+class CheckoutCard extends StatefulWidget {
+  const CheckoutCard({super.key});
+
   @override
-  State<MyWidget> createState() => _MyWidgetState();
+  State<CheckoutCard> createState() => _CheckoutCardState();
 }
 
-class _MyWidgetState extends State<MyWidget> {
+class _CheckoutCardState extends State<CheckoutCard> {
   final _cardController = CreditCardController();
   final _cvvFocusNode = FocusNode();
 
   @override
   void initState() {
     super.initState();
-    // Flip to back when CVV field gets focus
     _cvvFocusNode.addListener(() {
       if (_cvvFocusNode.hasFocus) {
         _cardController.flipToBack();
@@ -271,7 +234,7 @@ class _MyWidgetState extends State<MyWidget> {
     return Column(
       children: [
         CreditCardUi(
-          controller: _cardController, // 👈 Pass the controller
+          controller: _cardController,
           enableFlipping: true,
           cardHolderFullName: 'John Doe',
           cardNumber: '1234567812345678',
@@ -280,11 +243,11 @@ class _MyWidgetState extends State<MyWidget> {
         ),
         TextField(
           focusNode: _cvvFocusNode,
-          decoration: InputDecoration(labelText: 'CVV'),
+          decoration: const InputDecoration(labelText: 'CVV'),
         ),
         ElevatedButton(
-          onPressed: () => _cardController.flipCard(), // Manually flip
-          child: Text('Flip Card'),
+          onPressed: _cardController.flipCard,
+          child: const Text('Flip'),
         ),
       ],
     );
@@ -292,29 +255,88 @@ class _MyWidgetState extends State<MyWidget> {
 }
 ```
 
-The `CreditCardController` provides three methods:
+`CreditCardController` exposes:
 
-- `flipCard()`: Toggles between front and back
-- `flipToFront()`: Flips to front side (if not already showing)
-- `flipToBack()`: Flips to back side (if not already showing)
+| Member | Description |
+|---|---|
+| `flipCard()` | Toggles between front and back. |
+| `flipToFront()` | Flips to the front; no-op if already on the front. |
+| `flipToBack()` | Flips to the back; no-op if already on the back. |
+| `isFlipped` | Getter — `true` when the back side is showing. |
 
-ধন্যবাদ
+`CreditCardController` extends `ChangeNotifier`, so you can `addListener` to react to flip state changes. Call `dispose()` from your widget's `dispose` method.
 
----
+The controller has no effect when `enableFlipping: false`. Pair the two parameters together.
 
-## Contributor
+## Parameters reference
 
-<a href="https://www.linkedin.com/in/utpal-barman/">
-  <img src="https://user-images.githubusercontent.com/16848599/232288339-ecbd6cb1-3210-4304-b1e1-bc8434e290a8.png" width="100px" alt="Utpal Barman" style="border-radius:50%"/> <br /> <b>Utpal Barman 🇧🇩</b>
-</a>
-<br/> <br/>
-<p>
- <a href="https://www.linkedin.com/in/utpal-barman/">
-        <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white"
-            alt="Contact Author"/>
- </a>
-</p>
+Listed alphabetically. Defaults reflect the constructor; `null` means "not provided".
+
+| Name | Type | Default | Description |
+|---|---|---|---|
+| `autoHideBalance` | `bool?` | `false` | Shows a "TAP TO SEE BALANCE" placeholder; tapping reveals the balance for 2 seconds. |
+| `backgroundDecorationImage` | `DecorationImage?` | `null` | Image painted under the gradient. Supports `NetworkImage` and `AssetImage`. |
+| `balance` | `double?` | `0.0` | Balance displayed when `showBalance` is `true`. |
+| `bottomRightColor` | `Color?` | derived | Bottom-right gradient stop. Defaults to a darker shade of `topLeftColor`. |
+| `cardHolderFullName` | `String` | **required** | Rendered uppercased on the front of the card. |
+| `cardNumber` | `String` | **required** | The card number. Spaces, dashes, and asterisks are normalized before display. |
+| `cardProviderLogo` | `Widget?` | `null` | Any widget — typically a bank or brand logo. |
+| `cardProviderLogoPosition` | `CardProviderLogoPosition` | `.right` | Position of `cardProviderLogo` relative to the card-type label. |
+| `cardType` | `CardType` | `.credit` | Drives the small label at the top of the card. `CardType.other` hides the label. |
+| `controller` | `CreditCardController?` | `null` | Drives programmatic flipping. Requires `enableFlipping: true`. |
+| `creditCardType` | `CreditCardType?` | `null` | Overrides the auto-detected network logo. Pass `.none` to hide it. |
+| `currencySymbol` | `String?` | `'$'` | Prefix shown before the balance. |
+| `cvvNumber` | `String?` | `'***'` | Shown on the back of the card when flipped. |
+| `disableHapticFeedBack` | `bool?` | `false` | Disables haptic feedback on flip and balance tap. *(Note: the capital "B" reflects the existing public API.)* |
+| `doesSupportNfc` | `bool` | `true` | Shows the NFC icon next to the chip. |
+| `enableFlipping` | `bool?` | `false` | Renders the back side and enables the drag-to-flip gesture. Required for `controller` to take effect. |
+| `placeNfcIconAtTheEnd` | `bool` | `false` | Moves the NFC icon to the opposite side of the chip. Has no effect when `doesSupportNfc: false`. |
+| `scale` | `double` | `1.0` | **Deprecated** — use `width` instead. Will be removed in a future minor release. |
+| `shouldMaskCardNumber` | `bool` | `true` | Masks the middle digits with `*`. Card numbers under 12 digits are never masked. |
+| `showBalance` | `bool?` | `false` | Shows the balance area in place of the card-type label. |
+| `showValidFrom` | `bool` | `true` | Shows the "VALID FROM" segment when `validFrom` is provided. |
+| `showValidThru` | `bool` | `true` | Shows the "VALID THRU" segment. |
+| `topLeftColor` | `Color` | `Colors.purple` | Top-left gradient stop. |
+| `validFrom` | `String?` | `null` | Optional "MM/YY" start date. |
+| `validThru` | `String` | **required** | "MM/YY" expiration date. |
+| `width` | `double?` | `null` | Maximum width in logical pixels. Capped at 300; smaller values scale the card proportionally. |
+
+Full API documentation is available on [pub.dev](https://pub.dev/documentation/u_credit_card/latest/u_credit_card/CreditCardUi-class.html).
+
+## Migration notes
+
+- **`scale` → `width`** (since 1.3.0). `scale: 0.8` is equivalent to `width: 240`. The `scale` parameter will be removed in a future minor release.
+- **`disableShowingCardLogo` removed** (since 1.1.0). Use `creditCardType: CreditCardType.none` instead.
+- **`CreditCardController`** added in 1.6.0 for programmatic flipping. Existing widgets using only the drag gesture need no changes.
+
+## Compatibility
+
+- **Flutter**: 3.x (uses APIs available from Flutter 3.16+, e.g. `Durations`).
+- **Dart**: `>=3.3.0 <4.0.0`.
+- **Platforms**: any platform Flutter supports — no platform channels involved.
+
+## Contributing
+
+Bug reports, feature requests, and pull requests are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) and the [Code of Conduct](CODE_OF_CONDUCT.md).
+
+For security-sensitive reports, follow the guidance in [SECURITY.md](SECURITY.md).
 
 ## License
 
-This package is released under the [BSD 3-Clause License](https://raw.githubusercontent.com/utpal-barman/u-credit-card-flutter/main/LICENSE).
+Released under the [BSD 3-Clause License](LICENSE).
+
+---
+
+<p align="center">
+  <a href="https://www.linkedin.com/in/utpal-barman/">
+    <img src="https://user-images.githubusercontent.com/16848599/232288339-ecbd6cb1-3210-4304-b1e1-bc8434e290a8.png" width="100px" alt="Utpal Barman" style="border-radius:50%"/>
+  </a>
+  <br/>
+  <b>Utpal Barman</b>
+  <br/>
+  <sub>Built with ♥ in Bangladesh — ধন্যবাদ</sub>
+  <br/><br/>
+  <a href="https://www.linkedin.com/in/utpal-barman/">
+    <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn"/>
+  </a>
+</p>
