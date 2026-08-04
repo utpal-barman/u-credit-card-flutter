@@ -40,3 +40,7 @@ app.*.map.json
 
 # Test related
 coverage
+
+# Claude Code local config
+.claude/settings.local.json
+.claude/commands/
