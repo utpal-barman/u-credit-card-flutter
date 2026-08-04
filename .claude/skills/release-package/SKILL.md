@@ -1,11 +1,11 @@
 ---
 name: release-package
-description: Cuts a release of this Flutter package — bumps pubspec.yaml version, rewrites CHANGELOG.md from PR commits since the last tag, refreshes the README version pin, opens a release PR to develop, and prepares the matching git tag. Use whenever the user asks to "release", "cut a release", "ship a version", "bump the version", "publish", "tag a release", or names a target version like "release v1.6.0" — even when they don't say the word "release" explicitly (e.g. "make a 1.6 PR", "we're ready to ship 1.6").
+description: Cuts a release of this Flutter package — bumps pubspec.yaml version, rewrites CHANGELOG.md from PR commits since the last tag, refreshes the README version pin, opens a release PR to main, and prepares the matching git tag. Use whenever the user asks to "release", "cut a release", "ship a version", "bump the version", "publish", "tag a release", or names a target version like "release v1.6.0" — even when they don't say the word "release" explicitly (e.g. "make a 1.6 PR", "we're ready to ship 1.6").
 ---
 
 # release-package
 
-A repeatable release workflow for the `u_credit_card` Flutter package. The skill produces a single release PR against `develop` plus a tag plan; it does **not** push tags or merge anything itself.
+A repeatable release workflow for the `u_credit_card` Flutter package. The skill produces a single release PR against `main` plus a tag plan; it does **not** push tags or merge anything itself.
 
 ## Why this skill exists
 
@@ -24,15 +24,15 @@ Do **not** trigger when the user just asks to view the changelog, list tags, or 
 
 ## Hard rules (read before acting)
 
-1. **Always release from the latest `develop`.** Never from a feature branch, never from `main`. Run `git fetch origin develop` first. The release branch (`release/vX.Y.Z`) must be cut from `origin/develop`, and the PR's base must be `develop`. This is non-negotiable for this repo.
-2. **CHANGELOG range is `lastTag..origin/develop`** — not `..HEAD`. The local branch is irrelevant to what's actually shipping.
+1. **Always release from the latest `main`.** Never from a feature branch, never from `develop`. Run `git fetch origin main` first. The release branch (`release/vX.Y.Z`) must be cut from `origin/main`, and the PR's base must be `main`. This is non-negotiable for this repo.
+2. **CHANGELOG range is `lastTag..origin/main`** — not `..HEAD`. The local branch is irrelevant to what's actually shipping.
 3. **Never push the tag yourself.** Create it locally on the release commit *after* the PR merges, and leave the push as an explicit step the user runs. A premature tag pinned to a not-yet-merged commit is a mess to undo.
 4. **Reviewer is `@utpal-barman`.** Always request review from this GitHub user on the release PR. (They are the repo owner and have asked to sign off on every release.)
 5. **Version scheme is `vMAJOR.FEATURE.MINORFIX`** (semver-shaped, with the user's vocabulary). Use the picker rules below — don't guess.
 
 ## Version picker
 
-Look at the commits in `lastTag..origin/develop` and decide:
+Look at the commits in `lastTag..origin/main` and decide:
 
 | Highest commit type present | Bump |
 |---|---|
@@ -49,17 +49,17 @@ Execute these steps in order. After each step, briefly say what you did before m
 ### 1. Verify state and pick the version
 
 ```bash
-git fetch origin develop --tags
+git fetch origin main --tags
 git describe --tags --abbrev=0           # last tag, e.g. v1.5.0
-git log <lastTag>..origin/develop --pretty=format:"%h %s"
+git log <lastTag>..origin/main --pretty=format:"%h %s"
 ```
 
 Confirm with the user the version you intend to cut if (a) they didn't specify one, or (b) their request conflicts with the picker rule.
 
-### 2. Cut the release branch from develop
+### 2. Cut the release branch from main
 
 ```bash
-git checkout -B release/vX.Y.Z origin/develop
+git checkout -B release/vX.Y.Z origin/main
 ```
 
 Use `-B` (not `-b`) so re-running the skill recovers cleanly if the branch already exists locally.
@@ -106,7 +106,7 @@ Prepend a new section under `# Changelog` (above the previous top entry). Use th
 
 **Example transformation** (from this repo, for v1.6.0):
 
-Raw commits on develop since v1.5.0:
+Raw commits on main since v1.5.0:
 ```
 885f222 chore(deps): Bump very_good_analysis from 9.0.0 to 10.2.0 (#36)
 8c8cd14 docs: add AGENTS.md and CLAUDE.md for agent context (#35)
@@ -144,11 +144,11 @@ git push -u origin release/vX.Y.Z
 
 Use `chore(release): bump to vX.Y.Z` for both the commit and the PR title. The repo's older history uses bare `release: ...` but the PR title lint (`amannn/action-semantic-pull-request`) rejects that — `chore(release):` keeps commit and PR title aligned and passes the check. See [[pr-title-lint]] and [[git-ops-skill]].
 
-Open the PR against `develop` and request review from `utpal-barman`:
+Open the PR against `main` and request review from `utpal-barman`:
 
 ```bash
 gh pr create \
-  --base develop \
+  --base main \
   --head release/vX.Y.Z \
   --title "chore(release): bump to vX.Y.Z" \
   --reviewer utpal-barman \
@@ -182,8 +182,8 @@ Return the PR URL to the user.
 After the PR is open, tell the user the exact commands to run *after* the PR merges:
 
 ```bash
-git checkout develop
-git pull origin develop
+git checkout main
+git pull origin main
 git tag -a vX.Y.Z -m "Release vX.Y.Z"
 git push origin vX.Y.Z
 ```
@@ -195,8 +195,8 @@ Do not run these yourself. Tagging an unmerged commit, or pushing a tag the user
 - **No commits since the last tag.** Refuse and surface this — there's nothing to release. Don't create an empty release PR.
 - **Local branch dirty.** Stash or refuse. Never `git checkout -B` over uncommitted work.
 - **Tag already exists** (local or remote). Stop and ask. The version was probably already cut.
-- **`develop` is behind a feature branch the user thinks is "the release".** Tell them: the work must be merged to `develop` first; releases come from `develop`. Offer to wait or to help open the feature PR first.
-- **Pre-1.0 / hotfix off `main`.** Not supported by this skill yet — fall back to manual and tell the user.
+- **`main` is behind a feature branch the user thinks is "the release".** Tell them: the work must be merged to `main` first; releases come from `main`. Offer to wait or to help open the feature PR first.
+- **Hotfix off an older tag** (patching a shipped version without taking everything on `main`). Not supported by this skill yet — fall back to manual and tell the user.
 
 ## Reviewer vs. assignee
 
@@ -204,4 +204,4 @@ The release PR's reviewer should be `@utpal-barman` — but if the PR author *is
 
 ## What success looks like
 
-A single commit on `release/vX.Y.Z` that touches exactly `pubspec.yaml`, `CHANGELOG.md`, and `README.md`; a PR titled `chore(release): bump to vX.Y.Z` against `develop` with `@utpal-barman` as reviewer (or assignee if self); and a clear next-step instruction for the user to tag after merge. Nothing else changes.
+A single commit on `release/vX.Y.Z` that touches exactly `pubspec.yaml`, `CHANGELOG.md`, and `README.md`; a PR titled `chore(release): bump to vX.Y.Z` against `main` with `@utpal-barman` as reviewer (or assignee if self); and a clear next-step instruction for the user to tag after merge. Nothing else changes.

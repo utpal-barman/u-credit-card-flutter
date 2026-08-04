@@ -81,7 +81,7 @@ This applies to: `git commit`, `git commit --amend`, `git tag -a`, `gh pr create
 
 ### 3. Never use destructive operations without explicit user authorization
 
-- No `git push --force` or `--force-with-lease` to shared branches (`develop`, `main`) unless the user explicitly says "force push develop" (or equivalent) in this session. Note: `develop` is also branch-protected on the remote, so force-push will be rejected by GitHub even if attempted.
+- No `git push --force` or `--force-with-lease` to shared branches (`main`, `develop`) unless the user explicitly says "force push main" (or equivalent) in this session. Note: both `main` and `develop` are branch-protected on the remote, so force-push will be rejected by GitHub even if attempted.
 - No `git reset --hard`, `git checkout -- .`, `git clean -fd`, `git branch -D` over unmerged work.
 - No `--no-verify` to skip hooks.
 - No `git config` changes.
@@ -138,23 +138,24 @@ Note the consistent scoping (`chore(example):` not `chore:`), the imperative sub
 
 ## Branches and pushes
 
+- **Always branch off the latest `origin/main`.** Never off `develop`, never off another feature branch, never off whatever happens to be checked out. Run `git fetch origin main` first, then `git checkout -b <branch> origin/main`. This is non-negotiable for this repo — `main` is the default and integration branch.
 - **Branch naming:** `feat/<short-slug>`, `fix/<short-slug>`, `chore/<short-slug>`, `release/v<X.Y.Z>`, `docs/<short-slug>`. Slug is lowercase, hyphenated, derived from the change ("programmatic-card-flipping", not "programmaticCardFlipping").
 - **Pushing a new branch:** `git push -u origin <branch>` so upstream is set.
-- **Pushing to `develop` directly** is allowed only for `.claude/` tooling commits (see [[skill-files-direct-to-develop]]). Everything else goes through a PR.
-- **Force-push:** only on branches you own (`feat/*`, `fix/*`, `release/*` before merge) and only with `--force-with-lease`, never plain `--force`. Never force-push `develop` or `main` without explicit user authorization in the current session — and even then expect GitHub to reject it on protected branches.
+- **Pushing to `main` directly** is allowed only for `.claude/` tooling commits (see [[skill-files-direct-to-main]]). Everything else goes through a PR.
+- **Force-push:** only on branches you own (`feat/*`, `fix/*`, `release/*` before merge) and only with `--force-with-lease`, never plain `--force`. Never force-push `main` or `develop` without explicit user authorization in the current session — and even then expect GitHub to reject it on protected branches.
 
 ## Tags
 
 - Format: `v<MAJOR>.<MINOR>.<PATCH>` (leading `v`). Examples: `v1.6.0`, `v1.6.1`.
 - Always annotated: `git tag -a vX.Y.Z -m "Release vX.Y.Z"`.
-- Tag the **merge commit on `develop` after the release PR merges**, not the release branch tip. See [[release-package-skill]].
+- Tag the **merge commit on `main` after the release PR merges**, not the release branch tip. See [[release-package-skill]].
 - Push tags individually: `git push origin vX.Y.Z`, not `git push --tags` (which can sweep up old/local tags).
 
 ## Amend, rebase, reword
 
 - **Amend** is fine for the commit you just made *if it hasn't been pushed*. After `git commit --amend`, double-check no co-author trailer was re-introduced (the template can sneak back).
 - **Interactive rebase** is fine on private branches before pushing. Don't use the `-i` flag inside this skill's tooling — it requires a TTY. Instead, build the sequence via `git rebase --onto` or by squashing in the UI.
-- **Reword on a pushed branch** requires force-push-with-lease and is allowed on your own branches. Not on `develop`/`main` (protected).
+- **Reword on a pushed branch** requires force-push-with-lease and is allowed on your own branches. Not on `main`/`develop` (protected).
 
 ## What to do when the user says "commit this"
 
@@ -168,7 +169,7 @@ If the diff spans multiple logical changes (e.g. a `feat` plus an unrelated `cho
 
 ## Failure modes to avoid
 
-- Pushing a co-author trailer to `develop` (the headline reason this skill exists).
+- Pushing a co-author trailer to `main` (the headline reason this skill exists).
 - Squashing a meaningful body into the subject line.
 - Using `chore:` as a catch-all when `fix` / `refactor` / `docs` would be more honest.
 - Letting a pre-commit hook failure cause an `--amend` on the wrong commit. If a hook fails, fix the issue, re-stage, and make a NEW commit.
