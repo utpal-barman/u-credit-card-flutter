@@ -3,6 +3,7 @@ name: PR validation
 on:
   push:
     branches:
+      - develop
       - main
 
   pull_request:

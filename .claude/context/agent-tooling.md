@@ -6,8 +6,8 @@ The `.claude/` directory: what's there, what's shared, and what stays local.
 
 **Skills** (`.claude/skills/`, tracked)
 
-- `git-ops` — the single source of truth for commits, branches, pushes, and tags. Conventional Commits always; **never** an AI co-author trailer or "Generated with…" footer; always branch off the latest `origin/main`. Other skills defer to it for message format and trailer policy.
-- `release-package` — the full release flow (cut from `origin/main`, bump, changelog, README pins, PR, tag plan). Never pushes tags or merges.
+- `git-ops` — the single source of truth for commits, branches, pushes, and tags. Conventional Commits always; **never** an AI co-author trailer or "Generated with…" footer; always branch off the latest `origin/develop` and target PRs at `develop`. Other skills defer to it for message format and trailer policy.
+- `release-package` — the full release flow (cut from `origin/develop`, bump, changelog, README pins, PR, tag plan). Never pushes tags or merges.
 
 **Commands** (`.claude/commands/`, **gitignored**)
 
@@ -23,7 +23,7 @@ The `.claude/` directory: what's there, what's shared, and what stays local.
 - **Skills are tracked; local config and commands are not.** `.claude/settings.local.json` is per-machine and `.claude/commands/` is scratch tooling, so both are gitignored. The consequence: `/implement` works locally but is not shared or reviewed — tracking `.claude/commands/` (or promoting the command to a skill) is the open call.
 - **The `/implement` panel is the gate, with three mandatory user checkpoints** that stop the run even on a unanimous approve: a breaking public API change, any licensing concern, or new `pubspec.yaml` dependencies. Those are the cases where an autonomous wrong call is expensive to walk back on a published package.
 - **Two revision rounds, then stop and ask.** The command never implements over an unresolved `BLOCKING` verdict.
-- **`/implement` always runs in a worktree.** It writes a reproduction test in Phase 1, before the panel has approved anything, and may abandon the approach entirely if the panel rejects it. In the main checkout that would leave the user's tree dirty with work that may never ship, and block them from using the repo while the panel runs. `EnterWorktree` also branches from `origin/main` by default, which is the base the command requires anyway.
+- **`/implement` always runs in a worktree.** It writes a reproduction test in Phase 1, before the panel has approved anything, and may abandon the approach entirely if the panel rejects it. In the main checkout that would leave the user's tree dirty with work that may never ship, and block them from using the repo while the panel runs. `EnterWorktree` branches from the default branch (`main`), which is the wrong base now that PRs target `develop`, so the command re-points the worktree branch at `origin/develop` as its first step.
 - **`/implement` never touches `pubspec.yaml` `version:` or `CHANGELOG.md`** — see the release flow slice.
 
 ## How the agent team actually works

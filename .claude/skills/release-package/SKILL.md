@@ -24,15 +24,15 @@ Do **not** trigger when the user just asks to view the changelog, list tags, or 
 
 ## Hard rules (read before acting)
 
-1. **Always release from the latest `main`.** Never from a feature branch, never from `develop`. Run `git fetch origin main` first. The release branch (`release/vX.Y.Z`) must be cut from `origin/main`, and the PR's base must be `main`. This is non-negotiable for this repo.
-2. **CHANGELOG range is `lastTag..origin/main`** — not `..HEAD`. The local branch is irrelevant to what's actually shipping.
+1. **Always release from the latest `develop`, and target `main`.** Never from a feature branch, never from `main` itself. Run `git fetch origin develop` first. The release branch (`release/vX.Y.Z`) must be cut from `origin/develop`, and the PR's base must be **`main`** — this is the single documented exception to the repo's "all PRs target `develop`" rule, and it exists because `publish.yml` fires on push to `main` plus a `v*` tag. Non-negotiable for this repo. See [[git-ops-skill]].
+2. **CHANGELOG range is `lastTag..origin/develop`** — not `..HEAD`. The local branch is irrelevant to what's actually shipping.
 3. **Never push the tag yourself.** Create it locally on the release commit *after* the PR merges, and leave the push as an explicit step the user runs. A premature tag pinned to a not-yet-merged commit is a mess to undo.
 4. **Reviewer is `@utpal-barman`.** Always request review from this GitHub user on the release PR. (They are the repo owner and have asked to sign off on every release.)
 5. **Version scheme is `vMAJOR.FEATURE.MINORFIX`** (semver-shaped, with the user's vocabulary). Use the picker rules below — don't guess.
 
 ## Version picker
 
-Look at the commits in `lastTag..origin/main` and decide:
+Look at the commits in `lastTag..origin/develop` and decide:
 
 | Highest commit type present | Bump |
 |---|---|
@@ -49,17 +49,17 @@ Execute these steps in order. After each step, briefly say what you did before m
 ### 1. Verify state and pick the version
 
 ```bash
-git fetch origin main --tags
+git fetch origin develop --tags
 git describe --tags --abbrev=0           # last tag, e.g. v1.5.0
-git log <lastTag>..origin/main --pretty=format:"%h %s"
+git log <lastTag>..origin/develop --pretty=format:"%h %s"
 ```
 
 Confirm with the user the version you intend to cut if (a) they didn't specify one, or (b) their request conflicts with the picker rule.
 
-### 2. Cut the release branch from main
+### 2. Cut the release branch from develop
 
 ```bash
-git checkout -B release/vX.Y.Z origin/main
+git checkout -B release/vX.Y.Z origin/develop
 ```
 
 Use `-B` (not `-b`) so re-running the skill recovers cleanly if the branch already exists locally.
@@ -106,7 +106,7 @@ Prepend a new section under `# Changelog` (above the previous top entry). Use th
 
 **Example transformation** (from this repo, for v1.6.0):
 
-Raw commits on main since v1.5.0:
+Raw commits on develop since v1.5.0:
 ```
 885f222 chore(deps): Bump very_good_analysis from 9.0.0 to 10.2.0 (#36)
 8c8cd14 docs: add AGENTS.md and CLAUDE.md for agent context (#35)
@@ -177,26 +177,35 @@ EOF
 
 Return the PR URL to the user.
 
-### 7. Prepare the tag (do not push)
+### 7. Prepare the tag and the back-merge (do not run either)
 
 After the PR is open, tell the user the exact commands to run *after* the PR merges:
 
 ```bash
+# 1. Tag main's merge commit — this is what publishes to pub.dev
 git checkout main
 git pull origin main
 git tag -a vX.Y.Z -m "Release vX.Y.Z"
 git push origin vX.Y.Z
+
+# 2. Back-merge so develop doesn't drift behind main
+git checkout develop
+git pull origin develop
+git merge --ff-only origin/main   # falls back to a merge commit if develop moved
+git push origin develop
 ```
 
 Do not run these yourself. Tagging an unmerged commit, or pushing a tag the user hasn't agreed to, is the kind of mistake that's tedious to clean up on a published package.
+
+**The back-merge is not optional.** The release PR lands the version bump, CHANGELOG, and README pins on `main` only. Skip step 2 and `develop` — the branch every other PR targets — is permanently behind on those three files, so the next release computes its CHANGELOG range from a stale base.
 
 ## Edge cases
 
 - **No commits since the last tag.** Refuse and surface this — there's nothing to release. Don't create an empty release PR.
 - **Local branch dirty.** Stash or refuse. Never `git checkout -B` over uncommitted work.
 - **Tag already exists** (local or remote). Stop and ask. The version was probably already cut.
-- **`main` is behind a feature branch the user thinks is "the release".** Tell them: the work must be merged to `main` first; releases come from `main`. Offer to wait or to help open the feature PR first.
-- **Hotfix off an older tag** (patching a shipped version without taking everything on `main`). Not supported by this skill yet — fall back to manual and tell the user.
+- **`develop` is behind a feature branch the user thinks is "the release".** Tell them: the work must be merged to `develop` first; releases come from `develop`. Offer to wait or to help open the feature PR first.
+- **Hotfix off an older tag** (patching a shipped version without taking everything on `develop`). Not supported by this skill yet — fall back to manual and tell the user.
 
 ## Reviewer vs. assignee
 

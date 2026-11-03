@@ -9,7 +9,7 @@ A Flutter widget that renders a realistic, customizable credit-card UI with opti
 [![License](https://img.shields.io/github/license/utpal-barman/u-credit-card-flutter?logo=open-source-initiative&logoColor=green)](https://github.com/utpal-barman/u-credit-card-flutter/blob/main/LICENSE)
 
 <p align="center">
-<img src="https://user-images.githubusercontent.com/16848599/233195178-b4fb8007-ba2e-48ed-8020-7a0854d5038c.png" width="700" alt="u_credit_card preview"/>
+<img src="https://raw.githubusercontent.com/utpal-barman/u-credit-card-flutter/main/screenshots/demo.gif" width="720" alt="u_credit_card demo: card-network auto-detection, custom gradients, flip animation, hidden balance"/>
 </p>
 
 ## Contents

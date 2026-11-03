@@ -26,6 +26,6 @@ That means:
 
 | Slice | Covers |
 | --- | --- |
-| [branching-ci-and-releases.md](branching-ci-and-releases.md) | Branch model (`main` as default/integration), protection rules, CI triggers, release and publish flow |
+| [branching-ci-and-releases.md](branching-ci-and-releases.md) | Branch model (`develop` integrates, `main` publishes), protection rules, CI triggers, release and publish flow |
 | [typography-customization.md](typography-customization.md) | Caller-supplied text styles across the card's text slots — planned, not implemented |
 | [agent-tooling.md](agent-tooling.md) | Skills, the `/implement` command, this folder, what's gitignored under `.claude/` |
